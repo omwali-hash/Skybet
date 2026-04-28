@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  phone         String   @unique
+  name          String
+  pinHash       String
+  email         String?
+  status        String   @default("active")
+  kycVerified   Boolean  @default(false)
+  dailyLimit    Float    @default(50000)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  wallet        Wallet?
+  transactions  Transaction[]
+  bets          Bet[]
+
+  @@map("users")
+}
+
+model Wallet {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  balance       Float    @default(0)
+  frozenBalance Float    @default(0)
+  currency      String   @default("KES")
+  updatedAt     DateTime @updatedAt
+
+  @@map("wallets")
+}
+
+model Transaction {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type          String
+  amount        Float
+  status        String   @default("pending")
+  reference     String?
+  description   String?
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+  @@map("transactions")
+}
+
+model Game {
+  id            String   @id @default(cuid())
+  crashMultiplier Float
+  houseEdge     Float    @default(0.03)
+  status        String   @default("pending")
+  startedAt     DateTime @default(now())
+  endedAt       DateTime?
+
+  bets          Bet[]
+
+  @@map("games")
+}
+
+model Bet {
+  id                String   @id @default(cuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  gameId            String
+  game              Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  amount            Float
+  cashoutMultiplier Float?
+  profit            Float?
+  status            String   @default("active")
+  placedAt          DateTime @default(now())
+
+  @@index([userId])
+  @@index([gameId])
+  @@map("bets")
+}
+
+model MpesaCallback {
+  id              String   @id @default(cuid())
+  phone           String
+  amount          Float
+  mpesaReceiptId  String   @unique
+  transactionRef  String?
+  status          String
+  payload         Json
+  createdAt       DateTime @default(now())
+
+  @@map("mpesa_callbacks")
+}
