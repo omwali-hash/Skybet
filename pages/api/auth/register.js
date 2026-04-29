@@ -1,5 +1,5 @@
 // pages/api/auth/register.js
-import authService from '../../lib/services/auth.service';
+import authService from '@/lib/services/auth.service';
 import prisma from '@/lib/db';
 
 export default async function handler(req, res) {

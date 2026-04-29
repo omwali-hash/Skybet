@@ -2,13 +2,20 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
+import dynamic from 'next/dynamic';
 import Header from '../src/components/layout/Header';
 import BottomNav from '../src/components/layout/BottomNav';
 
-export default function WithdrawPage() {
+function WithdrawPageComponent() {
   const router = useRouter();
   const { user, token } = useSelector(state => state.auth);
   const { balance } = useSelector(state => state.wallet);
+
+  // Redirect to login if not authenticated
+  if (typeof window !== 'undefined' && !token) {
+    router.push('/login');
+    return null;
+  }
   const [amount, setAmount] = useState(100);
   const [phone, setPhone] = useState(user?.phone || '');
   const [loading, setLoading] = useState(false);
@@ -218,3 +225,8 @@ export default function WithdrawPage() {
     </div>
   );
 }
+
+export default dynamic(() => Promise.resolve(WithdrawPageComponent), {
+  ssr: false,
+  loading: () => <div>Loading...</div>
+});

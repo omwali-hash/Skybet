@@ -15,8 +15,10 @@ export default function LoginPage() {
       pin: validatePin
     }
   );
-    const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [phone, setPhone] = useState('')
+  const [pin, setPin] = useState('')
 
   const dispatch = useDispatch()
   const router = useRouter()

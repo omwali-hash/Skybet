@@ -1,6 +1,6 @@
 // pages/api/auth/login-new.js
-import authService from '../../lib/services/auth.service';
-import { checkSelfExclusion } from '../../lib/middleware/responsibleGambling';
+import authService from '@/lib/services/auth.service';
+import { checkSelfExclusion } from '@/lib/middleware/responsibleGambling';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

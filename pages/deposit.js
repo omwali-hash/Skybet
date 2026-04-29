@@ -2,12 +2,19 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
+import dynamic from 'next/dynamic';
 import Header from '../src/components/layout/Header';
 import BottomNav from '../src/components/layout/BottomNav';
 
-export default function DepositPage() {
+function DepositPageComponent() {
   const router = useRouter();
   const { user, token } = useSelector(state => state.auth);
+
+  // Redirect to login if not authenticated
+  if (typeof window !== 'undefined' && !token) {
+    router.push('/login');
+    return null;
+  }
   const [amount, setAmount] = useState(100);
   const [phone, setPhone] = useState(user?.phone || '');
   const [loading, setLoading] = useState(false);
@@ -164,3 +171,8 @@ export default function DepositPage() {
     </div>
   );
 }
+
+export default dynamic(() => Promise.resolve(DepositPageComponent), {
+  ssr: false,
+  loading: () => <div>Loading...</div>
+});
