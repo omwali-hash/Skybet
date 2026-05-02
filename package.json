@@ -1,0 +1,9 @@
+{
+  "name": "skybet-static",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static deployment for SkyBet Aviator Clone",
+  "scripts": {
+    "build": "echo 'Static deployment'"
+  }
+}
