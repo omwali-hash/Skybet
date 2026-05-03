@@ -1,9 +1,16 @@
 {
-  "name": "skybet-static",
+  "name": "skybet",
   "version": "1.0.0",
   "private": true,
-  "description": "Static deployment for SkyBet Aviator Clone",
+  "description": "SkyBet Aviator Clone",
   "scripts": {
-    "build": "echo 'Static deployment'"
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "build": "echo 'Building...'"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
   }
 }

@@ -87,7 +87,7 @@
             </div>
             <div class="flex items-center gap-2">
                 <div class="flex items-center bg-panel-light rounded border border-white/20">
-                    <div class="px-3 py-1 flex items-center gap-2 text-sm font-bold text-gray-300">
+                    <div id="headerBalance" class="px-3 py-1 flex items-center gap-2 text-sm font-bold text-gray-300">
                         <i class="fa-solid fa-wallet"></i> KES 0.00
                     </div>
                     <button
@@ -96,7 +96,7 @@
                         DEPOSIT
                     </button>
                 </div>
-                <button class="text-white p-2 text-xl hover:text-gray-300 transition-colors"><i
+                <button class="text-white p-2 text-xl hover:text-gray-300 transition-colors" onclick="toggleHamburger()"><i
                         class="fa-solid fa-bars"></i></button>
             </div>
         </header>
@@ -222,11 +222,15 @@
                             </div>
                         </div>
                         <!-- Bet Button -->
-                        <button
-                            class="w-32 sm:w-40 bg-green-brand hover:bg-green-600 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
-                            <span class="text-[10px] uppercase tracking-wider mb-0.5 opacity-90">Bet [Next Game]</span>
-                            <span class="text-xl">KSH 20.00</span>
-                        </button>
+                        <div class="w-32 sm:w-40 flex">
+                            <button id="loginBtn1" onclick="document.getElementById('authModal').classList.remove('hidden')" class="w-full bg-blue-btn hover:bg-blue-800 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
+                                <span class="text-sm uppercase tracking-wider mb-0.5 opacity-90">LOGIN TO BET</span>
+                            </button>
+                            <button id="betBtn1" onclick="handleBetClick()" class="hidden w-full bg-green-brand hover:bg-green-600 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
+                                <span class="text-[10px] uppercase tracking-wider mb-0.5 opacity-90">Bet [Next Game]</span>
+                                <span class="text-xl">KSH 20.00</span>
+                            </button>
+                        </div>
                     </div>
                     <!-- Auto Cash Out -->
                     <div
@@ -245,9 +249,9 @@
                 </div>
 
 
-                <!-- Panel 2 (Desktop only) -->
+                <!-- Panel 2 -->
                 <div
-                    class="hidden md:flex bg-panel-dark border border-white/10 rounded-lg p-3 flex-col gap-3 shadow-xl relative overflow-hidden">
+                    class="flex bg-panel-dark border border-white/10 rounded-lg p-3 flex-col gap-3 shadow-xl relative overflow-hidden">
                     <div
                         class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-900 to-transparent opacity-50">
                     </div>
@@ -277,11 +281,15 @@
                             </div>
                         </div>
                         <!-- Bet Button -->
-                        <button
-                            class="w-32 sm:w-40 bg-green-brand hover:bg-green-600 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
-                            <span class="text-[10px] uppercase tracking-wider mb-0.5 opacity-90">Bet [Next Game]</span>
-                            <span class="text-xl">KSH 20.00</span>
-                        </button>
+                        <div class="w-32 sm:w-40 flex">
+                            <button id="regBtn2" onclick="document.getElementById('authModal').classList.remove('hidden')" class="w-full bg-red-brand hover:bg-red-800 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
+                                <span class="text-sm uppercase tracking-wider mb-0.5 opacity-90">REGISTER</span>
+                            </button>
+                            <button id="betBtn2" onclick="handleBetClick()" class="hidden w-full bg-green-brand hover:bg-green-600 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
+                                <span class="text-[10px] uppercase tracking-wider mb-0.5 opacity-90">Bet [Next Game]</span>
+                                <span class="text-xl">KSH 20.00</span>
+                            </button>
+                        </div>
                     </div>
                     <!-- Auto Cash Out -->
                     <div
@@ -339,43 +347,33 @@
             </div>
 
             <!-- Mobile Bottom Nav Placeholder -->
-            <div
-                class="md:hidden fixed bottom-6 left-0 right-0 bg-panel-dark flex justify-around p-2 border-t border-white/10 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.3)]">
-                <button
-                    class="flex flex-col items-center text-[10px] text-gray-400 hover:text-white transition-colors"><i
-                        class="fa-solid fa-wallet mb-1 text-lg"></i> WALLET</button>
-                <button
-                    class="flex flex-col items-center text-[10px] text-red-500 hover:text-red-400 transition-colors">
-                    <i class="fa-regular fa-circle-play mb-1 text-lg"></i>
-                    PLAY GAME
+            <!-- Main Bottom Navigation -->
+            <div class="fixed bottom-0 left-0 w-full bg-[#111322] border-t border-white/5 flex justify-between items-center px-4 md:px-12 py-2 pb-6 md:pb-4 z-[400] shadow-[0_-5px_15px_rgba(0,0,0,0.5)]">
+                <button onclick="toggleModal('walletModal')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-wallet text-lg"></i>
+                    <span class="text-[9px] font-bold">WALLET</span>
                 </button>
-                <button
-                    class="flex flex-col items-center text-[10px] text-gray-400 -mt-6 hover:text-white transition-colors group"
-                    onclick="toggleModal('depositModal')">
-                    <div
-                        class="bg-panel-light p-3.5 rounded-full border border-white/10 mb-1 shadow-lg group-hover:bg-white/10 transition-colors">
-                        <i class="fa-solid fa-plus text-lg"></i>
+                <button onclick="document.getElementById('walletModal').classList.add('hidden')" class="flex flex-col items-center gap-1 text-red-500 transition-colors">
+                    <i class="fa-regular fa-circle-play text-lg"></i>
+                    <span class="text-[9px] font-bold uppercase">Play Game</span>
+                </button>
+                <!-- Deposit Button (Raised) -->
+                <button onclick="toggleModal('depositModal')" class="relative w-14 flex justify-center">
+                    <div class="absolute -top-6 w-14 h-14 bg-[#1b1c2e] rounded-full flex flex-col items-center justify-center text-white shadow-xl border border-white/5 hover:bg-[#25263a] transition-colors">
+                        <i class="fa-solid fa-plus text-xl mb-0.5"></i>
                     </div>
-                    DEPOSIT
+                    <div class="mt-8 text-[9px] font-bold text-white text-center">DEPOSIT</div>
                 </button>
-                <button
-                    class="flex flex-col items-center text-[10px] text-gray-400 hover:text-white transition-colors"><i
-                        class="fa-solid fa-arrow-rotate-left mb-1 text-lg"></i> WITHDRAWALS</button>
-                <button
-                    class="flex flex-col items-center text-[10px] text-gray-400 hover:text-white transition-colors"><i
-                        class="fa-regular fa-comments mb-1 text-lg"></i> CHAT/RAIN</button>
+                <button onclick="toggleModal('walletModal')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-clock-rotate-left text-lg"></i>
+                    <span class="text-[9px] font-bold">WITHDRAWALS</span>
+                </button>
+                <button class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-regular fa-comments text-lg"></i>
+                    <span class="text-[9px] font-bold">CHAT/RAIN</span>
+                </button>
             </div>
         </div>
-
-        <!-- Footer Warning -->
-        <footer
-            class="bg-red-brand text-center py-2 text-[10px] text-white font-bold w-full fixed bottom-0 left-0 z-30 hidden md:block border-t border-white/10 shadow-[0_-5px_15px_rgba(211,24,24,0.3)]">
-            Gaming can be addictive! Not for persons under 18 years! | ©2025 SkyBet. All rights reserved.
-        </footer>
-        <footer
-            class="bg-red-brand text-center py-1 text-[8px] text-white font-bold w-full fixed bottom-0 left-0 z-30 md:hidden border-t border-white/10">
-            Gaming can be addictive! Not for persons under 18 years!
-        </footer>
     </div>
 
 
@@ -386,11 +384,11 @@
             <div class="flex items-center gap-3">
                 <div
                     class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white text-xl shadow-lg border border-gray-600">
-                    <i class="fa-solid fa-user"></i>
+                    <span id="sidebarInitial" class="font-bold text-lg"><i class="fa-solid fa-user"></i></span>
                 </div>
                 <div>
-                    <div class="text-sm font-bold uppercase tracking-wide text-white">Guest</div>
-                    <div class="text-[10px] text-gray-400">+254 ••• ••• •••</div>
+                    <div id="sidebarName" class="text-sm font-bold uppercase tracking-wide text-white">Guest</div>
+                    <div id="sidebarPhone" class="text-[10px] text-gray-400">+254 ••• ••• •••</div>
                 </div>
             </div>
             <div class="flex items-center gap-1.5 text-xs text-green-500 font-semibold">
@@ -421,6 +419,211 @@
         </div>
     </aside>
 
+    <!-- Hamburger Menu Modal -->
+    <div id="hamburgerMenuModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[250] hidden opacity-0 transition-opacity duration-200 flex justify-end">
+        <div id="hamburgerMenuModalContent" class="bg-[#1a0b16] w-[300px] h-full shadow-[-5px_0_15px_rgba(0,0,0,0.5)] transform translate-x-full transition-transform duration-300 flex flex-col border-l border-white/10">
+            <!-- Header User Info -->
+            <div class="p-4 border-b border-white/10 flex items-center gap-3 bg-black/30 relative">
+                <button onclick="toggleHamburger()" class="absolute top-2 right-2 text-gray-400 hover:text-white transition-colors w-8 h-8 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+                <div class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white text-xl shadow-lg border border-gray-600 shrink-0">
+                    <span id="menuInitial" class="font-bold text-lg"><i class="fa-solid fa-user"></i></span>
+                </div>
+                <div class="overflow-hidden">
+                    <div id="menuName" class="text-sm font-bold uppercase tracking-wide text-white truncate">Guest</div>
+                    <div id="menuPhone" class="text-[10px] text-gray-400 truncate">+254 ••• ••• •••</div>
+                </div>
+            </div>
+
+            <!-- Menu Items -->
+            <div class="flex-1 overflow-y-auto flex flex-col gap-1 p-3 text-sm text-white font-medium">
+                <div class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 cursor-pointer transition-colors">
+                    <div class="flex items-center gap-3"><i class="fa-solid fa-music text-gray-400 w-5 text-center"></i> MUSIC</div>
+                    <div class="w-8 h-4 bg-gray-600 rounded-full relative"><div class="w-4 h-4 bg-white rounded-full absolute left-0 shadow-sm"></div></div>
+                </div>
+                <div class="p-3 mt-2 rounded-lg bg-white/5 border border-white/10 text-center cursor-pointer hover:bg-white/10 transition-colors font-bold tracking-wide text-[13px]">
+                    OFFER RAIN
+                </div>
+                <div class="mt-4 border-t border-white/10 pt-4 flex flex-col gap-1">
+                    <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 cursor-pointer transition-colors" onclick="toggleHamburger()">
+                        <i class="fa-regular fa-circle-play text-gray-400 w-5 text-center"></i> PLAY SKYBET
+                    </div>
+                    <div class="text-[10px] text-gray-500 font-bold tracking-widest mt-2 mb-1 px-3">MY ACCOUNT</div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 cursor-pointer transition-colors" onclick="toggleHamburger(); toggleModal('walletModal')">
+                        <i class="fa-solid fa-wallet text-gray-400 w-5 text-center"></i> WITHDRAWALS
+                    </div>
+                    <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 cursor-pointer transition-colors" onclick="toggleHamburger(); toggleModal('walletModal')">
+                        <i class="fa-solid fa-list-ul text-gray-400 w-5 text-center"></i> MY TRANSACTIONS
+                    </div>
+                </div>
+
+                <div class="mt-4 p-4 rounded-xl border border-[#2d3a66] bg-[#101935] flex flex-col gap-2">
+                    <div class="text-blue-400 text-xs font-bold leading-relaxed">
+                        INVITE FRIENDS <span class="text-gray-300 font-normal">and get</span> 40% <span class="text-gray-300 font-normal">on their first Deposit.</span>
+                    </div>
+                    <button class="bg-transparent border border-gray-600 text-gray-300 text-[11px] py-2 rounded hover:bg-white/5 transition-colors font-bold tracking-wider mt-1">
+                        REGISTER AS AFFILIATE
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer Signout -->
+            <div class="p-4 border-t border-white/10 mt-auto bg-black/20">
+                <button onclick="signOut()" class="w-full bg-[#cc1a1a] hover:bg-[#a61515] text-white font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm tracking-wide">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wallet Modal -->
+    <div id="walletModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[350] hidden opacity-0 transition-opacity duration-200 flex items-center justify-center">
+        <div id="walletModalContent" class="bg-[#1d0e19] w-full h-full md:max-w-md md:h-[90vh] md:rounded-2xl shadow-2xl transform scale-95 transition-all duration-300 flex flex-col relative overflow-hidden border-x md:border border-white/10 pb-16 md:pb-0">
+            <!-- Header (Close Button) -->
+            <button onclick="toggleModal('walletModal')" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-black/30 border border-white/20 text-white hover:bg-white/10 transition-colors z-20">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar pb-24">
+                
+                <!-- Profile Section -->
+                <div class="flex flex-col items-center pt-8 pb-4">
+                    <div class="w-14 h-14 rounded-full bg-[#488e1a] flex items-center justify-center text-white text-2xl font-bold shadow-lg border border-green-600 mb-2 relative">
+                        <span id="walletInitial">G</span>
+                        <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-[#1d0e19]"></div>
+                    </div>
+                    <div id="walletName" class="text-white font-bold text-lg">Guest</div>
+                    <div id="walletPhone" class="text-gray-400 text-xs">+254 ••• ••• •••</div>
+                </div>
+
+                <!-- Balance Card -->
+                <div class="px-4 mb-4">
+                    <div class="bg-[#0b1021] border border-white/10 rounded-xl p-4 flex items-center gap-4 shadow-lg">
+                        <div class="w-12 h-12 rounded-lg bg-[#488e1a] flex items-center justify-center text-white text-xl">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <div>
+                            <div class="text-gray-400 text-[10px] font-bold tracking-wider uppercase mb-0.5">Available Balance</div>
+                            <div id="walletBalance" class="text-white font-bold text-xl">KES 0.00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Withdraw Funds -->
+                <div class="px-4 mb-4">
+                    <div class="bg-[#0b1021] rounded-t-xl p-3 border border-white/10 border-b-0 flex items-center gap-2">
+                        <i class="fa-regular fa-money-bill-1 text-green-500"></i>
+                        <span class="text-white font-bold text-sm tracking-wide">WITHDRAW FUNDS</span>
+                    </div>
+                    <div class="bg-[#381123] rounded-b-xl border border-white/10 p-4 shadow-inner">
+                        <div class="text-gray-300 text-xs mb-1.5">Amount to Withdraw</div>
+                        <input type="number" id="withdrawAmount" value="50" class="w-full bg-[#0b1021] border border-white/10 rounded-lg px-3 py-2.5 text-white outline-none focus:border-red-brand transition-colors mb-3" />
+                        
+                        <div class="grid grid-cols-4 gap-2 mb-2">
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">100</button>
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">500</button>
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">1,000</button>
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">5,000</button>
+                        </div>
+                        <div class="text-gray-500 text-[10px] mb-4">Minimum withdrawal: • Maximum: 300000</div>
+
+                        <div class="text-gray-300 text-xs mb-1.5">M-Pesa Phone Number</div>
+                        <div class="flex items-center bg-[#4d1f2e] border border-white/10 rounded-lg overflow-hidden mb-4">
+                            <div class="bg-white/5 px-3 py-2.5 border-r border-white/10 flex items-center gap-1.5">
+                                <img src="https://flagcdn.com/w20/ke.png" class="w-4 h-auto" />
+                                <i class="fa-solid fa-caret-down text-gray-400 text-[10px]"></i>
+                            </div>
+                            <input type="text" id="walletMpesaPhone" placeholder="Enter phone" class="flex-1 bg-transparent px-3 py-2.5 text-white text-sm outline-none" />
+                            <div class="px-3 text-gray-400"><i class="fa-solid fa-mobile-screen"></i></div>
+                        </div>
+
+                        <div class="bg-[#0b1021] rounded-lg p-3 flex flex-col gap-2 border border-white/5 mb-4 shadow-inner">
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>Amount:</span>
+                                <span class="text-white font-bold">50</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>Transaction Fee:</span>
+                                <span class="text-green-500 font-bold">FREE</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400 border-t border-white/10 pt-2 mt-1">
+                                <span>You Will Receive:</span>
+                                <span class="text-white font-bold">50</span>
+                            </div>
+                        </div>
+
+                        <button id="withdrawBtn" onclick="processWithdraw()" class="w-full bg-[#b30b0b] hover:bg-[#8f0909] text-white font-bold py-3 rounded-lg transition-colors shadow-lg shadow-red-900/20">
+                            WITHDRAW FUNDS
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Account Management -->
+                <div class="px-4 mb-4">
+                    <div class="bg-[#0b1021] rounded-t-xl p-3 border border-white/10 border-b-0">
+                        <span class="text-white font-bold text-sm tracking-wide">ACCOUNT MANAGEMENT</span>
+                    </div>
+                    <div class="bg-[#381123] rounded-b-xl border border-white/10 flex flex-col shadow-inner">
+                        <div class="flex items-center justify-between p-4 border-b border-white/5 cursor-pointer hover:bg-white/5 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-gray-400">
+                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white font-bold text-sm">Transaction History</div>
+                                    <div class="text-gray-400 text-[10px]">View all your bets and payments</div>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-gray-500 text-xs"></i>
+                        </div>
+                        <div class="flex items-center justify-between p-4 border-b border-white/5 cursor-pointer hover:bg-white/5 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-gray-400">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white font-bold text-sm">Betting History</div>
+                                    <div class="text-gray-400 text-[10px]">Review your gameplay statistics</div>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-gray-500 text-xs"></i>
+                        </div>
+                        <div class="p-4">
+                            <button onclick="toggleModal('walletModal'); signOut()" class="w-full bg-[#df3131] hover:bg-[#b52626] text-white font-bold py-2.5 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-red-900/20">
+                                <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Play Responsibly -->
+                <div class="px-4 mb-4">
+                    <div class="bg-[#24459c] rounded-xl p-4 relative overflow-hidden shadow-lg">
+                        <div class="relative z-10">
+                            <div class="text-white font-bold text-sm mb-1">Play Responsibly</div>
+                            <div class="text-blue-200 text-xs">Set deposit limits, take a break, or self-exclude if needed.</div>
+                        </div>
+                        <div class="absolute -right-4 -bottom-8 w-32 h-32 border-[12px] border-white/10 rounded-full opacity-50"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center">
+        <div class="bg-panel-dark border border-white/10 w-[90%] max-w-md rounded-xl p-6 shadow-2xl relative">
+            <h2 class="text-2xl font-bold text-white mb-6 text-center">Register / Play</h2>
+            <form id="authForm" class="flex flex-col gap-4">
+                <input type="text" id="authName" placeholder="Full Name" required class="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white outline-none focus:border-red-brand transition-colors" />
+                <input type="tel" id="authPhone" placeholder="Phone Number" required class="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white outline-none focus:border-red-brand transition-colors" />
+                <button type="submit" class="w-full bg-red-brand hover:bg-red-700 text-white font-bold py-3 rounded-lg mt-2 transition-colors">ENTER GAME</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Deposit Modal -->
     <div id="depositModal"
@@ -464,15 +667,15 @@
                 <!-- Phone Input -->
                 <div class="flex flex-col gap-2">
                     <label class="text-[15px] text-white/90 font-semibold">M-Pesa phone number</label>
-                    <input type="text" placeholder="format. 07xxxxxxxx or 01xxxxxxxx"
+                    <input type="text" id="depositPhone" placeholder="format. 07xxxxxxxx or 01xxxxxxxx"
                         class="w-full bg-[#3a3a3a] border-0 rounded-lg p-4 text-white font-medium outline-none focus:ring-2 focus:ring-red-700 placeholder-gray-400 shadow-inner" />
                 </div>
 
                 <!-- Submit -->
-                <button
-                    class="w-full bg-[#8b7d2a] hover:bg-[#a69432] active:scale-95 text-white font-bold py-4 rounded-lg uppercase tracking-widest shadow-[0_6px_20px_rgba(139,125,42,0.5)] transition-all"
-                    onclick="toggleModal('depositModal')">
-                    DEPOSIT FUNDS
+                <button id="depositBtn"
+                    class="relative flex justify-center items-center w-full bg-[#8b7d2a] hover:bg-[#a69432] active:scale-95 text-white font-bold py-4 rounded-lg uppercase tracking-widest shadow-[0_6px_20px_rgba(139,125,42,0.5)] transition-all"
+                    onclick="processDeposit()">
+                    <span>DEPOSIT FUNDS</span>
                 </button>
             </div>
         </div>
@@ -480,6 +683,10 @@
 
 
     <script>
+        // --- API Configuration ---
+        // For mobile testing: Use your PC's local IP (e.g., http://192.168.1.5:3001)
+        const API_BASE_URL = '';
+
         function toggleModal(modalID) {
             const modal = document.getElementById(modalID);
             const content = document.getElementById(modalID + 'Content');
@@ -507,6 +714,138 @@
 
         function setDepositAmount(val) {
             document.getElementById('depositAmount').value = val;
+        }
+
+        function updateBalanceDisplay() {
+            const balance = parseFloat(localStorage.getItem('skybet_balance')) || 0;
+            const formatted = 'KES ' + balance.toFixed(2);
+            document.getElementById('headerBalance').innerHTML = '<i class="fa-solid fa-wallet"></i> ' + formatted;
+            document.getElementById('walletBalance').innerText = formatted;
+        }
+
+        async function processDeposit() {
+            const amountStr = document.getElementById('depositAmount').value;
+            const phone = document.getElementById('depositPhone').value;
+            const btn = document.getElementById('depositBtn');
+            const btnText = btn.querySelector('span');
+
+            const amount = parseInt(amountStr);
+            if (!amount || amount < 200 || !phone) {
+                alert('Please enter a valid amount (Min 200) and phone number.');
+                return;
+            }
+
+            btn.disabled = true;
+            btnText.innerText = 'PROCESSING...';
+            btn.classList.add('opacity-70');
+
+            try {
+                // Call our local M-Pesa sandbox backend
+                const response = await fetch(`${API_BASE_URL}/api/stkpush`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount, phone })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    btnText.innerText = 'CHECK YOUR PHONE';
+                    // STK Push sent successfully. Now wait 5 seconds to simulate user entering PIN.
+                    setTimeout(() => {
+                        alert('STK Push Successful! (In real life, this updates after the webhook callback)');
+                        
+                        // Give the user their funds locally
+                        const currentBalance = parseFloat(localStorage.getItem('skybet_balance')) || 0;
+                        localStorage.setItem('skybet_balance', currentBalance + amount);
+                        updateBalanceDisplay();
+                        
+                        // Close modal and reset
+                        toggleModal('depositModal');
+                        btn.disabled = false;
+                        btnText.innerText = 'DEPOSIT FUNDS';
+                        btn.classList.remove('opacity-70');
+                        document.getElementById('depositAmount').value = '';
+                    }, 5000);
+                } else {
+                    alert('M-Pesa Error: ' + (data.error.errorMessage || JSON.stringify(data.error)));
+                    btn.disabled = false;
+                    btnText.innerText = 'DEPOSIT FUNDS';
+                    btn.classList.remove('opacity-70');
+                }
+
+            } catch (err) {
+                console.error(err);
+                alert('Server error! Make sure the Node.js backend is running on port 3001.');
+                btn.disabled = false;
+                btnText.innerText = 'DEPOSIT FUNDS';
+                btn.classList.remove('opacity-70');
+            }
+        }
+
+
+        async function processWithdraw() {
+            const amountStr = document.getElementById('withdrawAmount').value;
+            const phone = document.getElementById('walletMpesaPhone').value;
+            const btn = document.getElementById('withdrawBtn');
+            const amount = parseInt(amountStr);
+
+            if (!amount || amount < 50 || !phone) {
+                alert('Please enter a valid amount (Min 50) and phone number.');
+                return;
+            }
+
+            const currentBalance = parseFloat(localStorage.getItem('skybet_balance')) || 0;
+            if (amount > currentBalance) {
+                alert('Insufficient balance!');
+                return;
+            }
+
+            btn.disabled = true;
+            const originalText = btn.innerText;
+            btn.innerText = 'PROCESSING...';
+            btn.classList.add('opacity-70');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/withdraw`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount, phone })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    setTimeout(() => {
+                        alert('Withdrawal Successful! Funds sent to ' + phone);
+                        localStorage.setItem('skybet_balance', currentBalance - amount);
+                        updateBalanceDisplay();
+                        btn.disabled = false;
+                        btn.innerText = originalText;
+                        btn.classList.remove('opacity-70');
+                    }, 2000);
+                } else {
+                    alert('Withdrawal failed: ' + JSON.stringify(data.error));
+                    btn.disabled = false;
+                    btn.innerText = originalText;
+                    btn.classList.remove('opacity-70');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Server error! Make sure the Node.js backend is running on port 3001.');
+                btn.disabled = false;
+                btn.innerText = originalText;
+                btn.classList.remove('opacity-70');
+            }
+        }
+
+        function handleBetClick() {
+            const balance = parseFloat(localStorage.getItem('skybet_balance')) || 0;
+            if (balance <= 0) {
+                toggleModal('depositModal');
+            } else {
+                alert('Bet Placed Successfully!');
+            }
         }
 
 
@@ -692,6 +1031,111 @@
             // Start waiting state after 3 seconds
             setTimeout(startWaiting, 3000);
         }
+
+        // Authentication Logic
+        const authModal = document.getElementById('authModal');
+        const authForm = document.getElementById('authForm');
+        
+        function toggleHamburger() {
+            const modal = document.getElementById('hamburgerMenuModal');
+            const content = document.getElementById('hamburgerMenuModalContent');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                void modal.offsetWidth;
+                modal.classList.remove('opacity-0');
+                content.classList.remove('translate-x-full');
+            } else {
+                modal.classList.add('opacity-0');
+                content.classList.add('translate-x-full');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function updateUIWithUser(userObj) {
+            if (!userObj) return;
+            const name = userObj.name;
+            const phone = userObj.phone;
+            const initial = name.charAt(0).toUpperCase();
+
+            // Update Sidebar
+            document.getElementById('sidebarName').innerText = name;
+            document.getElementById('sidebarPhone').innerText = phone;
+            document.getElementById('sidebarInitial').innerText = initial;
+
+            // Update Menu
+            document.getElementById('menuName').innerText = name;
+            document.getElementById('menuPhone').innerText = phone;
+            document.getElementById('menuInitial').innerText = initial;
+
+            // Update Wallet
+            document.getElementById('walletName').innerText = name;
+            document.getElementById('walletPhone').innerText = phone;
+            document.getElementById('walletInitial').innerText = initial;
+            document.getElementById('walletMpesaPhone').value = phone;
+            
+            // Auto-fill deposit phone
+            const depPhone = document.getElementById('depositPhone');
+            if (depPhone) depPhone.value = phone;
+        }
+
+        function checkAuth() {
+            const userStr = localStorage.getItem('skybet_user');
+            if (userStr) {
+                const userObj = JSON.parse(userStr);
+                updateUIWithUser(userObj);
+                authModal.classList.add('hidden');
+                
+                // Show Bet Buttons, Hide Login/Register Buttons
+                document.getElementById('loginBtn1').classList.add('hidden');
+                document.getElementById('regBtn2').classList.add('hidden');
+                document.getElementById('betBtn1').classList.remove('hidden');
+                document.getElementById('betBtn2').classList.remove('hidden');
+            } else {
+                // Do not auto-show authModal anymore, let the user see the game.
+                
+                // Show Login/Register Buttons, Hide Bet Buttons
+                document.getElementById('loginBtn1').classList.remove('hidden');
+                document.getElementById('regBtn2').classList.remove('hidden');
+                document.getElementById('betBtn1').classList.add('hidden');
+                document.getElementById('betBtn2').classList.add('hidden');
+            }
+        }
+        
+        authForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('authName').value;
+            const phone = document.getElementById('authPhone').value;
+            if (name && phone) {
+                const userObj = { name, phone };
+                localStorage.setItem('skybet_user', JSON.stringify(userObj));
+                checkAuth();
+            }
+        });
+
+        function signOut() {
+            localStorage.removeItem('skybet_user');
+            document.getElementById('authName').value = '';
+            document.getElementById('authPhone').value = '';
+            
+            // Reset UI
+            document.getElementById('sidebarName').innerText = 'Guest';
+            document.getElementById('sidebarPhone').innerText = '+254 ••• ••• •••';
+            document.getElementById('sidebarInitial').innerHTML = '<i class="fa-solid fa-user"></i>';
+            document.getElementById('menuName').innerText = 'Guest';
+            document.getElementById('menuPhone').innerText = '+254 ••• ••• •••';
+            document.getElementById('menuInitial').innerHTML = '<i class="fa-solid fa-user"></i>';
+            document.getElementById('walletName').innerText = 'Guest';
+            document.getElementById('walletPhone').innerText = '+254 ••• ••• •••';
+            document.getElementById('walletInitial').innerHTML = 'G';
+            document.getElementById('walletMpesaPhone').value = '';
+            
+            checkAuth();
+        }
+
+        checkAuth();
+        updateBalanceDisplay();
 
         // Start with waiting state
         startWaiting();
