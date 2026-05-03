@@ -73,6 +73,28 @@
         .animate-scale-pulse {
             animation: scalePulse 0.6s ease-in-out infinite;
         }
+    
+        .premium-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .premium-btn:hover {
+            transform: scale(1.03);
+            filter: brightness(1.1);
+        }
+        .premium-btn:active {
+            transform: scale(0.97);
+        }
+        .glow-red {
+            box-shadow: 0 0 15px rgba(211, 24, 24, 0.3);
+        }
+        .glow-green {
+            box-shadow: 0 0 15px rgba(72, 142, 26, 0.3);
+        }
+        .stake-card {
+            background: linear-gradient(145deg, #1a0b16, #2d0d16);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
     </style>
 </head>
 
@@ -91,7 +113,7 @@
                         <i class="fa-solid fa-wallet"></i> KES 0.00
                     </div>
                     <button
-                        class="bg-red-brand text-white px-3 py-1 font-bold text-sm border-l border-white/20 hover:bg-red-700 transition-colors"
+                        class="bg-red-brand text-white px-3 py-1 font-bold text-sm border-l border-white/20 hover:bg-red-700 transition-all hover:brightness-110 active:scale-95"
                         onclick="toggleModal('depositModal')">
                         DEPOSIT
                     </button>
@@ -637,7 +659,7 @@
                 <p id="authSubtitle" class="text-gray-400 text-sm mb-6 text-center font-medium">Start your flight to big wins!</p>
                 
                 <form id="authForm" class="w-full flex flex-col gap-5">
-                    <div id="authNameContainer" class="flex flex-col gap-2">
+                    <div id="authNameContainer" class="flex flex-col gap-2 transition-all duration-300 opacity-100">
                         <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase ml-1">Account Holder</label>
                         <div class="relative">
                             <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
@@ -717,9 +739,9 @@
 
                 <!-- Submit -->
                 <button id="depositBtn"
-                    class="relative flex justify-center items-center w-full bg-[#8b7d2a] hover:bg-[#a69432] active:scale-95 text-white font-bold py-4 rounded-lg uppercase tracking-widest shadow-[0_6px_20px_rgba(139,125,42,0.5)] transition-all"
+                    class="relative flex justify-center items-center w-full bg-[#8b7d2a] hover:bg-[#a69432] active:scale-95 text-white font-bold py-4 rounded-lg uppercase tracking-widest shadow-[0_6px_20px_rgba(139,125,42,0.5)] transition-all hover:scale-[1.01] hover:brightness-110"
                     onclick="processDeposit()">
-                    <span>DEPOSIT FUNDS</span>
+                    <span><span class="relative z-10">DEPOSIT FUNDS</span></span>
                 </button>
             </div>
         </div>
@@ -741,7 +763,7 @@
                 tabReg.classList.add('text-gray-500');
                 tabLogin.classList.add('bg-red-brand', 'text-white');
                 tabLogin.classList.remove('text-gray-500');
-                nameContainer.classList.add('hidden');
+                nameContainer.classList.add('hidden'); nameContainer.classList.add('opacity-0');
                 nameInput.required = false;
                 subtitle.innerText = 'Welcome back! Enter your phone to login.';
                 submitBtn.innerText = 'LOGIN TO GAME';
@@ -750,7 +772,7 @@
                 tabReg.classList.remove('text-gray-500');
                 tabLogin.classList.remove('bg-red-brand', 'text-white');
                 tabLogin.classList.add('text-gray-500');
-                nameContainer.classList.remove('hidden');
+                nameContainer.classList.remove('hidden'); nameContainer.classList.remove('opacity-0');
                 nameInput.required = true;
                 subtitle.innerText = 'Start your flight to big wins!';
                 submitBtn.innerText = 'ENTER COCKPIT';
@@ -850,7 +872,7 @@
 
             } catch (err) {
                 console.error(err);
-                alert('Server error! Make sure the Node.js backend is running on port 3001.');
+                alert('M-Pesa Service Error. Please try again later.');
                 btn.disabled = false;
                 btnText.innerText = 'DEPOSIT FUNDS';
                 btn.classList.remove('opacity-70');
