@@ -227,20 +227,19 @@
                                 class="flex items-stretch bg-panel-light rounded border border-white/10 overflow-hidden">
                                 <button
                                     class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-r border-white/10 transition-colors">−</button>
-                                <input type="text" value="20"
-                                    class="flex-1 w-full bg-transparent text-white text-center font-bold outline-none" />
+                                <input type="text" id="betAmount1" value="20" class="flex-1 w-full bg-transparent text-white text-center font-bold outline-none" />
                                 <button
                                     class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-l border-white/10 transition-colors">+</button>
                             </div>
                             <div class="grid grid-cols-4 gap-1">
                                 <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">50</button>
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(1, 50)">50</button>
                                 <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">100</button>
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(1, 100)">100</button>
                                 <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">200</button>
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(1, 200)">200</button>
                                 <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">500</button>
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(1, 500)">500</button>
                             </div>
                         </div>
                         <!-- Bet Button -->
@@ -284,8 +283,7 @@
                                 class="flex items-stretch bg-panel-light rounded border border-white/10 overflow-hidden">
                                 <button
                                     class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-r border-white/10 transition-colors">−</button>
-                                <input type="text" value="20"
-                                    class="flex-1 w-full bg-transparent text-white text-center font-bold outline-none" />
+                                <input type="text" id="betAmount2" value="20" class="flex-1 w-full bg-transparent text-white text-center font-bold outline-none" />
                                 <button
                                     class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-l border-white/10 transition-colors">+</button>
                                 <button
@@ -293,13 +291,13 @@
                             </div>
                             <div class="grid grid-cols-4 gap-1">
                                 <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">50</button>
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(2, 50)">50</button>
                                 <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">100</button>
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(2, 100)">100</button>
                                 <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">200</button>
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(2, 200)">200</button>
                                 <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">500</button>
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(2, 500)">500</button>
                             </div>
                         </div>
                         <!-- Bet Button -->
@@ -543,10 +541,10 @@
                         <input type="number" id="withdrawAmount" value="100" class="w-full bg-[#0b1021] border border-white/10 rounded-lg px-3 py-2.5 text-white outline-none focus:border-red-brand transition-colors mb-3" />
                         
                         <div class="grid grid-cols-4 gap-2 mb-2">
-                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">100</button>
-                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">500</button>
-                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">1,000</button>
-                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">5,000</button>
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors" type="button" onclick="setWithdrawAmount(100)">100</button>
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors" type="button" onclick="setWithdrawAmount(500)">500</button>
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors" type="button" onclick="setWithdrawAmount(1000)">1,000</button>
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors" type="button" onclick="setWithdrawAmount(5000)">5,000</button>
                         </div>
                         <div class="text-gray-500 text-[10px] mb-4">Minimum withdrawal: 100 • Maximum: 300000</div>
 
@@ -643,6 +641,7 @@
             <div class="absolute -top-24 -left-24 w-48 h-48 bg-red-600/10 rounded-full blur-3xl"></div>
             <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-blue-600/10 rounded-full blur-3xl"></div>
             
+            <button class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 transition-colors z-20" onclick="document.getElementById('authModal').classList.add('hidden')"><i class="fa-solid fa-xmark"></i></button>
             <div class="relative z-10 flex flex-col items-center">
                 <div class="w-20 h-20 bg-red-brand rounded-2xl flex items-center justify-center shadow-lg mb-6 rotate-3">
                     <img src="Assets/images/airplane.svg" class="w-12 h-12 filter brightness-0 invert" alt="Logo" />
@@ -691,44 +690,57 @@
     </div>
 
 
+    
     <!-- Deposit Modal -->
-    <div id="depositModal"
-        class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-200">
-        <div class="bg-[#a30b0b] w-[90%] max-w-[420px] rounded-xl shadow-2xl border border-red-900/40 overflow-hidden transform scale-95 transition-transform duration-200"
-            id="depositModalContent">
-            <!-- Header -->
-            <div class="flex justify-between items-center px-5 pt-5 pb-3">
-                <h2 class="text-white font-bold text-2xl tracking-wide">DEPOSIT</h2>
-                <button
-                    class="w-11 h-11 rounded-full bg-[#1a0d2e] border border-white/10 text-white flex items-center justify-center hover:bg-[#2a1d3e] transition-colors shadow-lg"
-                    onclick="toggleModal('depositModal')">
-                    <i class="fa-solid fa-xmark text-base"></i>
-                </button>
+    <div id="depositModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[500] flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
+        <div class="bg-[#1a0b16] border border-white/10 w-full max-w-md rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden transform scale-95 transition-transform duration-200" id="depositModalContent">
+            <!-- Decorative Background Elements -->
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-red-600/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-green-600/10 rounded-full blur-3xl"></div>
+            
+            <button class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 transition-colors z-20" onclick="toggleModal('depositModal')">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="relative z-10">
+                <h2 class="text-2xl font-black italic text-white mb-1 tracking-tighter uppercase">DEPOSIT FUNDS</h2>
+                <p class="text-gray-400 text-sm mb-6 font-medium">Send money to your betting account via M-Pesa</p>
+                
+                <!-- Presets -->
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <button class="bg-black/40 hover:bg-red-brand/20 border border-white/10 rounded-xl py-3 text-white font-bold text-sm transition-all" type="button" onclick="setDepositAmount(100)">+100</button>
+                    <button class="bg-black/40 hover:bg-red-brand/20 border border-white/10 rounded-xl py-3 text-white font-bold text-sm transition-all" type="button" onclick="setDepositAmount(500)">+500</button>
+                    <button class="bg-black/40 hover:bg-red-brand/20 border border-white/10 rounded-xl py-3 text-white font-bold text-sm transition-all" type="button" onclick="setDepositAmount(1000)">+1000</button>
+                </div>
+
+                <div class="flex flex-col gap-5">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase ml-1">Amount (KES)</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-money-bill-1 absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
+                            <input type="number" id="depositAmount" placeholder="Min 100" 
+                                class="w-full bg-black/40 border border-white/10 rounded-xl px-11 py-4 text-white outline-none focus:border-red-brand focus:ring-1 focus:ring-red-brand/30 transition-all font-bold text-lg" />
+                        </div>
+                        <p class="text-[10px] text-gray-500 ml-1">Min: 100 | Max: 150,000</p>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase ml-1">M-Pesa Number</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
+                            <input type="tel" id="depositPhone" placeholder="07xxxxxxxx" 
+                                class="w-full bg-black/40 border border-white/10 rounded-xl px-11 py-4 text-white outline-none focus:border-red-brand focus:ring-1 focus:ring-red-brand/30 transition-all font-medium" />
+                        </div>
+                    </div>
+
+                    <button id="depositBtn" onclick="processDeposit()" class="w-full bg-red-brand hover:bg-red-700 text-white font-bold py-4 rounded-xl mt-2 transition-all shadow-[0_10px_20px_rgba(211,24,24,0.3)] hover:translate-y-[-2px] active:translate-y-0 text-lg tracking-wide uppercase">
+                        <span>DEPOSIT FUNDS</span>
+                    </button>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Body -->
-            <div class="px-5 pb-6 flex flex-col gap-5">
-                <p class="text-white/80 text-sm font-medium">Send money into your Betting account</p>
-
-                <!-- Presets — 3 buttons -->
-                <div class="grid grid-cols-3 gap-3">
-                    <button
-                        class="bg-transparent hover:bg-green-700/20 border-2 border-green-500 rounded-lg py-3 text-green-400 font-bold text-base transition-colors"
-                        onclick="setDepositAmount(100)">+100</button>
-                    <button
-                        class="bg-transparent hover:bg-green-700/20 border-2 border-green-500 rounded-lg py-3 text-green-400 font-bold text-base transition-colors"
-                        onclick="setDepositAmount(200)">+200</button>
-                    <button
-                        class="bg-transparent hover:bg-green-700/20 border-2 border-green-500 rounded-lg py-3 text-green-400 font-bold text-base transition-colors"
-                        onclick="setDepositAmount(500)">+500</button>
-                </div>
-
-                <!-- Amount Input -->
-                <div class="flex flex-col gap-1.5">
-                    <input type="number" id="depositAmount" value=""
-                        class="w-full bg-black border-0 rounded-lg p-4 text-white font-bold text-lg outline-none focus:ring-2 focus:ring-red-700 shadow-inner" />
-                    <p class="text-[11px] text-red-200/50 tracking-wide">Minimum Deposit KES 100 &amp; Maximum Deposit KES 150000</p>
-                </div>
 
                 <!-- Phone Input -->
                 <div class="flex flex-col gap-2">
@@ -749,6 +761,48 @@
 
 
     <script>
+
+        function setDepositAmount(val) {
+            const el = document.getElementById('depositAmount');
+            if (el) el.value = val;
+        }
+        function setWithdrawAmount(val) {
+            const el = document.getElementById('withdrawAmount');
+            if (el) el.value = val;
+        }
+
+
+        function setBetAmount(panel, val) {
+            const el = document.getElementById('betAmount' + panel);
+            if (el) el.value = val;
+            updateBetDisplay(panel);
+        }
+        function changeBetAmount(panel, val) {
+            const el = document.getElementById('betAmount' + panel);
+            if (el) {
+                let curr = parseInt(el.value) || 0;
+                el.value = Math.max(1, curr + val);
+                updateBetDisplay(panel);
+            }
+        }
+        function doubleBetAmount(panel) {
+            const el = document.getElementById('betAmount' + panel);
+            if (el) {
+                let curr = parseInt(el.value) || 0;
+                el.value = curr * 2;
+                updateBetDisplay(panel);
+            }
+        }
+        function updateBetDisplay(panel) {
+            const el = document.getElementById('betAmount' + panel);
+            const btn = document.getElementById('betBtn' + panel);
+            if (el && btn) {
+                const val = parseFloat(el.value) || 0;
+                const span = btn.querySelector('.text-xl');
+                if (span) span.innerText = 'KSH ' + val.toFixed(2);
+            }
+        }
+
 
         function switchAuthTab(tab) {
             const tabReg = document.getElementById('tabRegister');
@@ -1199,14 +1253,33 @@
             }
         }
         
-        authForm.addEventListener('submit', (e) => {
+                authForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const name = document.getElementById('authName').value;
-            const phone = document.getElementById('authPhone').value;
-            if (name && phone) {
-                const userObj = { name, phone };
+            const nameInput = document.getElementById('authName');
+            const phoneInput = document.getElementById('authPhone');
+            const phone = phoneInput ? phoneInput.value : '';
+            let name = nameInput ? nameInput.value : '';
+            
+            const isLogin = document.getElementById('tabLogin') && document.getElementById('tabLogin').classList.contains('bg-red-brand');
+
+            if (isLogin) {
+                const savedUser = localStorage.getItem('skybet_user');
+                if (savedUser) {
+                    const parsed = JSON.parse(savedUser);
+                    if (parsed.phone === phone) name = parsed.name;
+                }
+                if (!name) name = "Member " + (phone ? phone.slice(-4) : "User");
+            }
+
+            if (phone) {
+                const userObj = { name: name || "Player", phone };
                 localStorage.setItem('skybet_user', JSON.stringify(userObj));
                 checkAuth();
+                const modal = document.getElementById('authModal');
+                if (modal) modal.classList.add('hidden');
+                console.log('Auth success:', userObj);
+            } else {
+                alert('Please enter your phone number');
             }
         });
 
