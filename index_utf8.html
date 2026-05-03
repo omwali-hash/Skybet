@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -80,23 +80,23 @@
     <!-- Main Content Left -->
     <div class="flex-1 flex flex-col h-full overflow-y-auto no-scrollbar relative">
         <!-- Header -->
-        <header class="flex justify-between items-center bg-[#1a0b16] px-3 py-2.5 border-b border-white/5 shrink-0 sticky top-0 z-[500] backdrop-blur-md bg-opacity-95">
-            <div class="flex items-center gap-1.5 cursor-pointer">
-                <img src="Assets/images/airplane.svg" class="h-5 md:h-7 w-auto object-contain filter brightness-0 invert opacity-90" alt="SkyBet Logo" />
-                <span class="font-black text-lg md:text-xl italic tracking-tighter text-white">SKYBET</span>
+        <header class="flex justify-between items-center bg-panel-dark p-3 border-b border-white/10 shrink-0">
+            <div class="flex items-center gap-2 cursor-pointer">
+                <img src="Assets/images/airplane.svg" class="h-8 w-auto object-contain filter brightness-0 invert" alt="SkyBet Logo" />
+                <span class="font-black text-xl italic tracking-tighter">SKYBET</span>
             </div>
-            <div class="flex items-center gap-1.5 md:gap-3">
-                <div class="flex items-center bg-[#2d0d16] rounded-lg border border-white/10 overflow-hidden shadow-inner">
-                    <div id="headerBalance" class="pl-2.5 pr-1.5 py-1 flex items-center gap-1.5 text-[11px] md:text-sm font-black text-gray-300 whitespace-nowrap">
-                        <i class="fa-solid fa-wallet text-[10px] md:text-xs text-red-500"></i> KES 0.00
+            <div class="flex items-center gap-2">
+                <div class="flex items-center bg-panel-light rounded border border-white/20">
+                    <div id="headerBalance" class="px-3 py-1 flex items-center gap-2 text-sm font-bold text-gray-300">
+                        <i class="fa-solid fa-wallet"></i> KES 0.00
                     </div>
                     <button
-                        class="bg-[#d31818] active:scale-95 transition-all text-white px-2.5 md:px-4 py-1.5 font-black text-[10px] md:text-xs border-l border-white/10 hover:bg-red-700 uppercase tracking-widest"
+                        class="bg-red-brand text-white px-3 py-1 font-bold text-sm border-l border-white/20 hover:bg-red-700 transition-colors"
                         onclick="toggleModal('depositModal')">
                         DEPOSIT
                     </button>
                 </div>
-                <button class="text-white p-1.5 md:p-2 text-lg hover:text-red-500 transition-all active:scale-90" onclick="toggleHamburger()"><i
+                <button class="text-white p-2 text-xl hover:text-gray-300 transition-colors" onclick="toggleHamburger()"><i
                         class="fa-solid fa-bars"></i></button>
             </div>
         </header>
@@ -120,8 +120,8 @@
             <span class="text-green-500">5.14x</span>
             <span class="text-white">4.52x</span>
             <span class="text-green-500">84.5x</span>
-            <button onclick="toggleModal('historyModal')"
-                class="text-gray-500 ml-auto bg-white/5 px-2 rounded hover:bg-white/10 transition-colors">•••</button>
+            <button
+                class="text-gray-500 ml-auto bg-white/5 px-2 rounded hover:bg-white/10 transition-colors">ΓÇóΓÇóΓÇó</button>
         </div>
 
 
@@ -181,18 +181,17 @@
         <!-- Controls Area -->
         <div class="p-2 md:p-4 flex-1 flex flex-col gap-3">
             <!-- Tabs -->
-            <div class="flex rounded-lg overflow-hidden border border-white/10 shrink-0 shadow-lg mb-2">
-                <button id="manualTab" onclick="switchBetTab('manual')"
-                    class="flex-1 bg-red-brand py-2.5 text-[10px] font-black text-white shadow-[inset_0_-3px_0_rgba(0,0,0,0.3)] tracking-widest uppercase transition-all">STAKE
+            <div class="flex rounded-lg overflow-hidden border border-white/10 shrink-0 shadow-lg">
+                <button
+                    class="flex-1 bg-red-brand py-2.5 text-xs font-bold text-white shadow-[inset_0_-3px_0_rgba(0,0,0,0.3)]">STAKE
                     SELECTOR</button>
-                <button id="aiTab" onclick="switchBetTab('ai')"
-                    class="flex-1 bg-[#1a0b16]/60 py-2.5 text-[10px] font-black text-white/50 hover:text-white tracking-widest uppercase transition-all">AI</button>
+                <button
+                    class="flex-1 bg-red-800 py-2.5 text-xs font-bold text-white/70 hover:bg-red-700 transition-colors">AI</button>
             </div>
 
 
-            <!-- Betting Sections -->
-            <div id="manualBettingSection" class="block transition-all duration-300">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 shrink-0">
+            <!-- Bet Panels Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 shrink-0">
                 <!-- Panel 1 -->
                 <div
                     class="bg-panel-dark border border-white/10 rounded-lg p-3 flex flex-col gap-3 shadow-xl relative overflow-hidden">
@@ -202,31 +201,34 @@
                     <div class="flex gap-2">
                         <!-- Stake Controls -->
                         <div class="flex-1 flex flex-col gap-2">
-                            <div class="flex items-stretch bg-[#0a0508] rounded-xl border border-white/10 overflow-hidden h-10 shadow-inner">
-                                <button onclick="adjustValue('stake1', -10)" class="w-10 bg-white/5 hover:bg-white/10 text-gray-400 font-black active:scale-90 transition-all border-r border-white/5">
-                                    <i class="fa-solid fa-minus text-[10px]"></i>
-                                </button>
-                                <input type="number" id="stake1" value="20"
-                                    class="flex-1 w-full bg-transparent text-white text-center font-black outline-none text-sm" />
-                                <button onclick="adjustValue('stake1', 10)" class="w-10 bg-white/5 hover:bg-white/10 text-gray-400 font-black active:scale-90 transition-all border-l border-white/5">
-                                    <i class="fa-solid fa-plus text-[10px]"></i>
-                                </button>
+                            <div
+                                class="flex items-stretch bg-panel-light rounded border border-white/10 overflow-hidden">
+                                <button
+                                    class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-r border-white/10 transition-colors">ΓêÆ</button>
+                                <input type="text" value="20"
+                                    class="flex-1 w-full bg-transparent text-white text-center font-bold outline-none" />
+                                <button
+                                    class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-l border-white/10 transition-colors">+</button>
                             </div>
-                            <div class="grid grid-cols-4 gap-1.5">
-                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">50</button>
-                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">100</button>
-                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">200</button>
-                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">500</button>
+                            <div class="grid grid-cols-4 gap-1">
+                                <button
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">50</button>
+                                <button
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">100</button>
+                                <button
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">200</button>
+                                <button
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">500</button>
                             </div>
                         </div>
                         <!-- Bet Button -->
-                        <div class="w-32 sm:w-44 flex">
-                            <button id="loginBtn1" onclick="toggleModal('authModal')" class="w-full bg-[#2b59c3] active:scale-95 transition-all rounded-xl flex flex-col items-center justify-center text-white font-black shadow-xl shadow-blue-900/20 border-t border-white/10">
-                                <span class="text-xs uppercase tracking-widest opacity-90">LOGIN</span>
+                        <div class="w-32 sm:w-40 flex">
+                            <button id="loginBtn1" onclick="document.getElementById('authModal').classList.remove('hidden')" class="w-full bg-blue-btn hover:bg-blue-800 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
+                                <span class="text-sm uppercase tracking-wider mb-0.5 opacity-90">LOGIN TO BET</span>
                             </button>
-                            <button id="betBtn1" onclick="handleBetClick()" class="hidden w-full bg-[#488e1a] active:scale-95 transition-all rounded-xl flex flex-col items-center justify-center text-white font-black shadow-xl shadow-green-900/20 border-t border-white/10">
-                                <span class="text-[9px] uppercase tracking-widest mb-0.5 opacity-80">BET</span>
-                                <span class="text-lg">KSH 20</span>
+                            <button id="betBtn1" onclick="handleBetClick()" class="hidden w-full bg-green-brand hover:bg-green-600 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
+                                <span class="text-[10px] uppercase tracking-wider mb-0.5 opacity-90">Bet [Next Game]</span>
+                                <span class="text-xl">KSH 20.00</span>
                             </button>
                         </div>
                     </div>
@@ -256,31 +258,36 @@
                     <div class="flex gap-2">
                         <!-- Stake Controls -->
                         <div class="flex-1 flex flex-col gap-2">
-                            <div class="flex items-stretch bg-[#0a0508] rounded-xl border border-white/10 overflow-hidden h-10 shadow-inner">
-                                <button onclick="adjustValue('stake2', -10)" class="w-10 bg-white/5 hover:bg-white/10 text-gray-400 font-black active:scale-90 transition-all border-r border-white/5">
-                                     <i class="fa-solid fa-minus text-[10px]"></i>
-                                 </button>
-                                 <input type="number" id="stake2" value="20"
-                                     class="flex-1 w-full bg-transparent text-white text-center font-black outline-none text-sm" />
-                                 <button onclick="adjustValue('stake2', 10)" class="w-10 bg-white/5 hover:bg-white/10 text-gray-400 font-black active:scale-90 transition-all border-l border-white/5">
-                                     <i class="fa-solid fa-plus text-[10px]"></i>
-                                 </button>
+                            <div
+                                class="flex items-stretch bg-panel-light rounded border border-white/10 overflow-hidden">
+                                <button
+                                    class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-r border-white/10 transition-colors">ΓêÆ</button>
+                                <input type="text" value="20"
+                                    class="flex-1 w-full bg-transparent text-white text-center font-bold outline-none" />
+                                <button
+                                    class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-l border-white/10 transition-colors">+</button>
+                                <button
+                                    class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold text-xs border-l border-white/10 transition-colors">*2</button>
                             </div>
-                            <div class="grid grid-cols-4 gap-1.5">
-                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">50</button>
-                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">100</button>
-                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">200</button>
-                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">500</button>
+                            <div class="grid grid-cols-4 gap-1">
+                                <button
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">50</button>
+                                <button
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">100</button>
+                                <button
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">200</button>
+                                <button
+                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner">500</button>
                             </div>
                         </div>
                         <!-- Bet Button -->
-                        <div class="w-32 sm:w-44 flex">
-                            <button id="regBtn2" onclick="toggleModal('authModal')" class="w-full bg-[#df3131] active:scale-95 transition-all rounded-xl flex flex-col items-center justify-center text-white font-black shadow-xl shadow-red-900/20 border-t border-white/10">
-                                <span class="text-xs uppercase tracking-widest opacity-90">REGISTER</span>
+                        <div class="w-32 sm:w-40 flex">
+                            <button id="regBtn2" onclick="document.getElementById('authModal').classList.remove('hidden')" class="w-full bg-red-brand hover:bg-red-800 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
+                                <span class="text-sm uppercase tracking-wider mb-0.5 opacity-90">REGISTER</span>
                             </button>
-                            <button id="betBtn2" onclick="handleBetClick()" class="hidden w-full bg-[#488e1a] active:scale-95 transition-all rounded-xl flex flex-col items-center justify-center text-white font-black shadow-xl shadow-green-900/20 border-t border-white/10">
-                                <span class="text-[9px] uppercase tracking-widest mb-0.5 opacity-80">BET</span>
-                                <span class="text-lg">KSH 20</span>
+                            <button id="betBtn2" onclick="handleBetClick()" class="hidden w-full bg-green-brand hover:bg-green-600 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
+                                <span class="text-[10px] uppercase tracking-wider mb-0.5 opacity-90">Bet [Next Game]</span>
+                                <span class="text-xl">KSH 20.00</span>
                             </button>
                         </div>
                     </div>
@@ -300,88 +307,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- AI Section -->
-        <div id="aiBettingSection" class="hidden transition-all duration-300">
-            <div class="bg-[#14183d] border border-white/10 rounded-2xl p-4 flex flex-col gap-4 shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-transparent opacity-30"></div>
-                
-                <!-- Top Controls -->
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="flex flex-col gap-1.5">
-                        <label class="text-[9px] font-black text-gray-500 tracking-widest uppercase ml-1">Base Bet</label>
-                        <div class="flex items-stretch bg-black rounded-xl border border-white/5 overflow-hidden h-11 shadow-inner">
-                            <button onclick="adjustValue('aiBaseBet', -10)" class="w-10 bg-white/5 hover:bg-white/10 text-white font-black active:scale-90 transition-all border-r border-white/5"><i class="fa-solid fa-minus text-[10px]"></i></button>
-                            <input type="number" id="aiBaseBet" value="100" class="flex-1 w-full bg-transparent text-white text-center font-black outline-none text-sm" />
-                            <button onclick="adjustValue('aiBaseBet', 10)" class="w-10 bg-white/5 hover:bg-white/10 text-white font-black active:scale-90 transition-all border-l border-white/5"><i class="fa-solid fa-plus text-[10px]"></i></button>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-1.5">
-                        <label class="text-[9px] font-black text-gray-500 tracking-widest uppercase ml-1">Auto Cashout</label>
-                        <div class="flex items-stretch bg-black rounded-xl border border-white/5 overflow-hidden h-11 shadow-inner">
-                            <button onclick="adjustValue('aiAutoCashout', -0.1)" class="w-10 bg-white/5 hover:bg-white/10 text-white font-black active:scale-90 transition-all border-r border-white/5"><i class="fa-solid fa-minus text-[10px]"></i></button>
-                            <input type="number" id="aiAutoCashout" value="2.1" step="0.1" class="flex-1 w-full bg-transparent text-white text-center font-black outline-none text-sm" />
-                            <button onclick="adjustValue('aiAutoCashout', 0.1)" class="w-10 bg-white/5 hover:bg-white/10 text-white font-black active:scale-90 transition-all border-l border-white/5"><i class="fa-solid fa-plus text-[10px]"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AI Rules -->
-                <div class="flex flex-col gap-4">
-                    <!-- If Win -->
-                    <div class="flex flex-col gap-2">
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-5 h-5 rounded-full border-2 border-green-500/30 flex items-center justify-center bg-green-500/10">
-                                <i class="fa-solid fa-check text-[9px] text-green-500"></i>
-                            </div>
-                            <span class="text-[10px] font-black text-white/80 tracking-wide uppercase">If You Win:</span>
-                        </div>
-                        <div class="flex items-center gap-3 pl-7">
-                            <button onclick="toggleAiRule('ruleWin')" id="ruleWin" data-active="true" class="w-5 h-5 rounded-full border border-white/10 bg-black/40 flex items-center justify-center active:scale-90 transition-all">
-                                <div class="rule-dot w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)] transition-all"></div>
-                            </button>
-                            <span class="text-[10px] font-bold text-gray-500 uppercase">Increase bet by:</span>
-                            <div class="flex items-stretch bg-black border border-white/5 rounded-lg overflow-hidden ml-auto h-9 w-24 shadow-inner">
-                                <input type="text" id="aiWinMultiplier" value="2.0x" class="flex-1 bg-transparent text-center text-white text-[10px] font-black outline-none" readonly />
-                                <div class="flex flex-col border-l border-white/5">
-                                    <button onclick="adjustValue('aiWinMultiplier', 0.1, true)" class="flex-1 px-2.5 hover:bg-white/5 text-gray-500 hover:text-white transition-colors border-b border-white/5"><i class="fa-solid fa-chevron-up text-[8px]"></i></button>
-                                    <button onclick="adjustValue('aiWinMultiplier', -0.1, true)" class="flex-1 px-2.5 hover:bg-white/5 text-gray-500 hover:text-white transition-colors"><i class="fa-solid fa-chevron-down text-[8px]"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- If Lose -->
-                    <div class="flex flex-col gap-2">
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-5 h-5 rounded-full border-2 border-red-500/30 flex items-center justify-center bg-red-500/10">
-                                <i class="fa-solid fa-xmark text-[9px] text-red-500"></i>
-                            </div>
-                            <span class="text-[10px] font-black text-white/80 tracking-wide uppercase">If You Lose:</span>
-                        </div>
-                        <div class="flex items-center gap-3 pl-7">
-                            <button onclick="toggleAiRule('ruleLose')" id="ruleLose" data-active="false" class="w-5 h-5 rounded-full border border-white/10 bg-black/40 flex items-center justify-center active:scale-90 transition-all">
-                                <div class="rule-dot w-2 h-2 rounded-full bg-black transition-all"></div>
-                            </button>
-                            <span class="text-[10px] font-bold text-gray-500 uppercase">Increase bet by:</span>
-                            <div class="flex items-stretch bg-black border border-white/5 rounded-lg overflow-hidden ml-auto h-9 w-24 shadow-inner">
-                                <input type="text" id="aiLoseMultiplier" value="2.0x" class="flex-1 bg-transparent text-center text-white text-[10px] font-black outline-none" readonly />
-                                <div class="flex flex-col border-l border-white/5">
-                                    <button onclick="adjustValue('aiLoseMultiplier', 0.1, true)" class="flex-1 px-2.5 hover:bg-white/5 text-gray-500 hover:text-white transition-colors border-b border-white/5"><i class="fa-solid fa-chevron-up text-[8px]"></i></button>
-                                    <button onclick="adjustValue('aiLoseMultiplier', -0.1, true)" class="flex-1 px-2.5 hover:bg-white/5 text-gray-500 hover:text-white transition-colors"><i class="fa-solid fa-chevron-down text-[8px]"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Start Button -->
-                <button class="w-full bg-[#df3131] hover:bg-[#b52626] active:scale-95 transition-all py-4 rounded-xl text-white font-black text-sm tracking-[0.1em] uppercase shadow-[0_5px_15px_rgba(223,49,49,0.2)] border-t border-white/10 mt-1">
-                    START AUTOPLAY
-                </button>
-            </div>
-        </div>
 
 
             <!-- Live Data Section -->
@@ -423,37 +348,29 @@
 
             <!-- Mobile Bottom Nav Placeholder -->
             <!-- Main Bottom Navigation -->
-            <div class="fixed bottom-0 left-0 w-full bg-[#111322] border-t border-white/5 grid grid-cols-5 items-center py-2 pb-6 md:pb-4 z-[400] shadow-[0_-5px_15px_rgba(0,0,0,0.5)]">
-                <!-- Wallet -->
-                <button onclick="toggleModal('walletModal')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-all active:scale-90">
-                    <i class="fa-solid fa-wallet text-lg md:text-xl"></i>
-                    <span class="text-[8px] md:text-[9px] font-black uppercase tracking-tighter">Wallet</span>
+            <div class="fixed bottom-0 left-0 w-full bg-[#111322] border-t border-white/5 flex justify-between items-center px-4 md:px-12 py-2 pb-6 md:pb-4 z-[400] shadow-[0_-5px_15px_rgba(0,0,0,0.5)]">
+                <button onclick="toggleModal('walletModal')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-wallet text-lg"></i>
+                    <span class="text-[9px] font-bold">WALLET</span>
                 </button>
-                
-                <!-- Play Game -->
-                <button onclick="document.getElementById('walletModal').classList.add('hidden')" class="flex flex-col items-center gap-1 text-red-500 transition-all active:scale-90">
-                    <i class="fa-regular fa-circle-play text-lg md:text-xl"></i>
-                    <span class="text-[8px] md:text-[9px] font-black uppercase tracking-tighter">Play</span>
+                <button onclick="document.getElementById('walletModal').classList.add('hidden')" class="flex flex-col items-center gap-1 text-red-500 transition-colors">
+                    <i class="fa-regular fa-circle-play text-lg"></i>
+                    <span class="text-[9px] font-bold uppercase">Play Game</span>
                 </button>
-                
-                <!-- Deposit Button (Raised Center) -->
-                <button onclick="toggleModal('depositModal')" class="relative flex flex-col items-center active:scale-95 transition-all">
-                    <div class="absolute -top-7 w-12 h-12 bg-gradient-to-b from-[#1b1c2e] to-[#0a0508] rounded-full flex items-center justify-center text-white shadow-2xl border border-white/10 ring-4 ring-[#111322]">
-                        <i class="fa-solid fa-plus text-xl"></i>
+                <!-- Deposit Button (Raised) -->
+                <button onclick="toggleModal('depositModal')" class="relative w-14 flex justify-center">
+                    <div class="absolute -top-6 w-14 h-14 bg-[#1b1c2e] rounded-full flex flex-col items-center justify-center text-white shadow-xl border border-white/5 hover:bg-[#25263a] transition-colors">
+                        <i class="fa-solid fa-plus text-xl mb-0.5"></i>
                     </div>
-                    <div class="mt-7 text-[8px] md:text-[9px] font-black text-white uppercase tracking-tighter">Deposit</div>
+                    <div class="mt-8 text-[9px] font-bold text-white text-center">DEPOSIT</div>
                 </button>
-                
-                <!-- Withdrawals -->
-                <button onclick="toggleModal('walletModal')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-all active:scale-90">
-                    <i class="fa-solid fa-clock-rotate-left text-lg md:text-xl"></i>
-                    <span class="text-[8px] md:text-[9px] font-black uppercase tracking-tighter">Withdraw</span>
+                <button onclick="toggleModal('walletModal')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-clock-rotate-left text-lg"></i>
+                    <span class="text-[9px] font-bold">WITHDRAWALS</span>
                 </button>
-                
-                <!-- Chat -->
-                <button class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-all active:scale-90">
-                    <i class="fa-regular fa-comments text-lg md:text-xl"></i>
-                    <span class="text-[8px] md:text-[9px] font-black uppercase tracking-tighter">Chat</span>
+                <button class="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-regular fa-comments text-lg"></i>
+                    <span class="text-[9px] font-bold">CHAT/RAIN</span>
                 </button>
             </div>
         </div>
@@ -521,11 +438,9 @@
 
             <!-- Menu Items -->
             <div class="flex-1 overflow-y-auto flex flex-col gap-1 p-3 text-sm text-white font-medium">
-                <div onclick="toggleSound()" class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 cursor-pointer transition-colors">
+                <div class="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 cursor-pointer transition-colors">
                     <div class="flex items-center gap-3"><i class="fa-solid fa-music text-gray-400 w-5 text-center"></i> MUSIC</div>
-                    <div id="menuSoundToggle" class="w-8 h-4 bg-red-600 rounded-full relative transition-colors">
-                        <div id="menuSoundDot" class="w-4 h-4 bg-white rounded-full absolute left-4 shadow-sm transition-all duration-200"></div>
-                    </div>
+                    <div class="w-8 h-4 bg-gray-600 rounded-full relative"><div class="w-4 h-4 bg-white rounded-full absolute left-0 shadow-sm"></div></div>
                 </div>
                 <div class="p-3 mt-2 rounded-lg bg-white/5 border border-white/10 text-center cursor-pointer hover:bg-white/10 transition-colors font-bold tracking-wide text-[13px]">
                     OFFER RAIN
@@ -693,273 +608,81 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 
     <!-- Auth Modal -->
-    <div id="authModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[600] flex items-center justify-center p-4 hidden">
-        <div class="bg-[#1a0b16] border border-white/10 w-full max-w-md rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
-            <button class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 transition-colors z-20" onclick="document.getElementById('authModal').classList.add('hidden')"><i class="fa-solid fa-xmark"></i></button>
-            <div class="relative z-10 flex flex-col items-center">
-                <div class="w-20 h-20 bg-red-brand rounded-2xl flex items-center justify-center shadow-lg mb-6 rotate-3">
-                    <img src="Assets/images/airplane.svg" class="w-12 h-12 filter brightness-0 invert" alt="Logo" />
-                </div>
-                <h2 class="text-3xl font-black italic text-white mb-2 tracking-tighter uppercase">SKYBET</h2>
-                <div class="flex w-full bg-black/40 p-1 rounded-xl border border-white/5 mb-8">
-                    <button id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-2 text-xs font-bold rounded-lg bg-red-brand text-white transition-all">REGISTER</button>
-                    <button id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-2 text-xs font-bold rounded-lg text-gray-500 hover:text-white transition-all">LOGIN</button>
-                </div>
-                <p id="authSubtitle" class="text-gray-400 text-sm mb-6 text-center font-medium">Start your flight to big wins!</p>
-                <form id="authForm" class="w-full flex flex-col gap-5">
-                    <div id="authNameContainer" class="flex flex-col gap-2 transition-all duration-300 opacity-100">
-                        <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase ml-1">Account Holder</label>
-                        <div class="relative">
-                            <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
-                            <input type="text" id="authName" placeholder="Enter Full Name" required class="w-full bg-black/40 border border-white/10 rounded-xl px-11 py-4 text-white outline-none focus:border-red-brand transition-all font-medium" />
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase ml-1">M-Pesa Number</label>
-                        <div class="relative">
-                            <i class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
-                            <input type="tel" id="authPhone" placeholder="07xxxxxxxx" required class="w-full bg-black/40 border border-white/10 rounded-xl px-11 py-4 text-white outline-none focus:border-red-brand transition-all font-medium" />
-                        </div>
-                    </div>
-                    <button type="submit" id="authSubmitBtn" class="w-full bg-red-brand active:scale-95 transition-all text-white font-bold py-4 rounded-xl mt-4 shadow-lg text-lg tracking-wide uppercase">ENTER COCKPIT</button>
-                </form>
-            </div>
+    <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] flex items-center justify-center">
+        <div class="bg-panel-dark border border-white/10 w-[90%] max-w-md rounded-xl p-6 shadow-2xl relative">
+            <h2 class="text-2xl font-bold text-white mb-6 text-center">Register / Play</h2>
+            <form id="authForm" class="flex flex-col gap-4">
+                <input type="text" id="authName" placeholder="Full Name" required class="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white outline-none focus:border-red-brand transition-colors" />
+                <input type="tel" id="authPhone" placeholder="Phone Number" required class="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white outline-none focus:border-red-brand transition-colors" />
+                <button type="submit" class="w-full bg-red-brand hover:bg-red-700 text-white font-bold py-3 rounded-lg mt-2 transition-colors">ENTER GAME</button>
+            </form>
         </div>
     </div>
 
     <!-- Deposit Modal -->
-    <div id="depositModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[500] flex items-center justify-center p-4 hidden opacity-0 transition-all duration-300">
-        <div class="bg-[#1a0b16] border border-white/10 w-full max-w-md rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative overflow-hidden transform scale-95 transition-all duration-300" id="depositModalContent">
-            <!-- Decorative Glows -->
-            <div class="absolute -top-24 -left-24 w-48 h-48 bg-red-600/20 rounded-full blur-[80px] pointer-events-none"></div>
-            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-green-600/20 rounded-full blur-[80px] pointer-events-none"></div>
-            
-            <!-- Close Button -->
-            <button class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 hover:rotate-90 transition-all z-20" onclick="toggleModal('depositModal')">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <div class="relative z-10">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-12 h-12 bg-[#488e1a] rounded-2xl flex items-center justify-center shadow-lg shadow-green-900/20">
-                        <i class="fa-solid fa-money-bill-transfer text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-black italic text-white tracking-tighter uppercase leading-none">DEPOSIT FUNDS</h2>
-                        <p class="text-gray-500 text-[10px] font-bold tracking-widest uppercase mt-1">Instant M-Pesa Transfer</p>
-                    </div>
-                </div>
-                
-                <!-- Amount Presets -->
-                <div class="grid grid-cols-4 gap-2 mb-8">
-                    <button type="button" class="bg-black/40 hover:bg-red-brand/20 border border-white/5 rounded-xl py-3 text-white font-bold text-xs transition-all active:scale-90" onclick="setDepositAmount(100)">100</button>
-                    <button type="button" class="bg-black/40 hover:bg-red-brand/20 border border-white/5 rounded-xl py-3 text-white font-bold text-xs transition-all active:scale-90" onclick="setDepositAmount(250)">250</button>
-                    <button type="button" class="bg-black/40 hover:bg-red-brand/20 border border-white/5 rounded-xl py-3 text-white font-bold text-xs transition-all active:scale-90" onclick="setDepositAmount(500)">500</button>
-                    <button type="button" class="bg-black/40 hover:bg-red-brand/20 border border-white/5 rounded-xl py-3 text-white font-bold text-xs transition-all active:scale-90" onclick="setDepositAmount(1000)">1000</button>
-                </div>
-
-                <div class="flex flex-col gap-6">
-                    <!-- Amount Input -->
-                    <div class="flex flex-col gap-2">
-                        <div class="flex justify-between items-center px-1">
-                            <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase">Amount to Deposit</label>
-                            <span class="text-[9px] font-bold text-red-brand/80">MIN KES 100</span>
-                        </div>
-                        <div class="relative group">
-                            <div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-brand transition-colors">KES</div>
-                            <input type="number" id="depositAmount" placeholder="100.00" 
-                                class="w-full bg-black/60 border border-white/10 rounded-2xl px-14 py-5 text-white outline-none focus:border-red-brand focus:ring-4 focus:ring-red-brand/10 transition-all font-black text-2xl shadow-inner" />
-                        </div>
-                    </div>
-
-                    <!-- Phone Input -->
-                    <div class="flex flex-col gap-2">
-                        <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase ml-1">M-Pesa Number</label>
-                        <div class="relative group">
-                            <i class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-brand transition-colors"></i>
-                            <input type="tel" id="depositPhone" placeholder="07xxxxxxxx" 
-                                class="w-full bg-black/60 border border-white/10 rounded-2xl px-12 py-4 text-white outline-none focus:border-red-brand focus:ring-4 focus:ring-red-brand/10 transition-all font-bold shadow-inner" />
-                        </div>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <button id="depositBtn" onclick="processDeposit()" class="w-full bg-red-brand active:scale-95 transition-all text-white font-black py-5 rounded-2xl shadow-xl shadow-red-900/40 text-lg tracking-widest uppercase mt-2 border-t border-white/20">
-                        <span>DEPOSIT FUNDS</span>
-                    </button>
-                    
-                    <p class="text-center text-gray-600 text-[10px] font-medium px-4">
-                        An STK Push will be sent to your phone. Enter your PIN to complete.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- History Modal -->
-    <div id="historyModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[700] flex items-center justify-center p-4 hidden opacity-0 transition-all duration-300">
-        <div class="bg-gradient-to-b from-[#5c0d1a] to-[#1a0b16] border border-white/20 w-full max-w-3xl rounded-2xl p-6 shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative overflow-hidden transform scale-95 transition-all duration-300" id="historyModalContent">
-            <div class="flex justify-between items-center mb-6 px-2">
-                <h2 class="text-white font-black italic tracking-tighter text-lg uppercase">ROUND HISTORY</h2>
-                <button class="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 transition-all" onclick="toggleModal('historyModal')">
-                    <i class="fa-solid fa-xmark"></i>
+    <div id="depositModal"
+        class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-200">
+        <div class="bg-[#a30b0b] w-[90%] max-w-[420px] rounded-xl shadow-2xl border border-red-900/40 overflow-hidden transform scale-95 transition-transform duration-200"
+            id="depositModalContent">
+            <!-- Header -->
+            <div class="flex justify-between items-center px-5 pt-5 pb-3">
+                <h2 class="text-white font-bold text-2xl tracking-wide">DEPOSIT</h2>
+                <button
+                    class="w-11 h-11 rounded-full bg-[#1a0d2e] border border-white/10 text-white flex items-center justify-center hover:bg-[#2a1d3e] transition-colors shadow-lg"
+                    onclick="toggleModal('depositModal')">
+                    <i class="fa-solid fa-xmark text-base"></i>
                 </button>
             </div>
-            <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 max-h-[60vh] overflow-y-auto no-scrollbar p-2">
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.26x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.78x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.07x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.69x</div>
-                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">21.54x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.69x</div>
-                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-600 font-bold text-sm bg-black/40">100x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.23x</div>
-                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">13.16x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.9x</div>
-                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">9.76x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.89x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.72x</div>
-                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">16.06x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.7x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.72x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.88x</div>
-                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">30.76x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.96x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.97x</div>
-                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">29.51x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.73x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.79x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">4.08x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.69x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.81x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.77x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.88x</div>
-                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">24.01x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.77x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">4.31x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.73x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.18x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">4.72x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.1x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.47x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.83x</div>
-                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">7.24x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">4.63x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.18x</div>
-                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">14.4x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.27x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.9x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.77x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.78x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.87x</div>
-                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.11x</div>
-                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">95.39x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.83x</div>
-                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.85x</div>
+
+            <!-- Body -->
+            <div class="px-5 pb-6 flex flex-col gap-5">
+                <p class="text-white/80 text-sm font-medium">Send money into your Betting account</p>
+
+                <!-- Presets ΓÇö 3 buttons -->
+                <div class="grid grid-cols-3 gap-3">
+                    <button
+                        class="bg-transparent hover:bg-green-700/20 border-2 border-green-500 rounded-lg py-3 text-green-400 font-bold text-base transition-colors"
+                        onclick="setDepositAmount(100)">+100</button>
+                    <button
+                        class="bg-transparent hover:bg-green-700/20 border-2 border-green-500 rounded-lg py-3 text-green-400 font-bold text-base transition-colors"
+                        onclick="setDepositAmount(200)">+200</button>
+                    <button
+                        class="bg-transparent hover:bg-green-700/20 border-2 border-green-500 rounded-lg py-3 text-green-400 font-bold text-base transition-colors"
+                        onclick="setDepositAmount(500)">+500</button>
+                </div>
+
+                <!-- Amount Input -->
+                <div class="flex flex-col gap-1.5">
+                    <input type="number" id="depositAmount" value=""
+                        class="w-full bg-black border-0 rounded-lg p-4 text-white font-bold text-lg outline-none focus:ring-2 focus:ring-red-700 shadow-inner" />
+                    <p class="text-[11px] text-red-200/50 tracking-wide">Minimum Deposit KES 200 &amp; Maximum Deposit KES 150000</p>
+                </div>
+
+                <!-- Phone Input -->
+                <div class="flex flex-col gap-2">
+                    <label class="text-[15px] text-white/90 font-semibold">M-Pesa phone number</label>
+                    <input type="text" id="depositPhone" placeholder="format. 07xxxxxxxx or 01xxxxxxxx"
+                        class="w-full bg-[#3a3a3a] border-0 rounded-lg p-4 text-white font-medium outline-none focus:ring-2 focus:ring-red-700 placeholder-gray-400 shadow-inner" />
+                </div>
+
+                <!-- Submit -->
+                <button id="depositBtn"
+                    class="relative flex justify-center items-center w-full bg-[#8b7d2a] hover:bg-[#a69432] active:scale-95 text-white font-bold py-4 rounded-lg uppercase tracking-widest shadow-[0_6px_20px_rgba(139,125,42,0.5)] transition-all"
+                    onclick="processDeposit()">
+                    <span>DEPOSIT FUNDS</span>
+                </button>
             </div>
         </div>
     </div>
 
-    <audio id="gameAudio" loop src="Assets/Aviator.mp3"></audio>
 
     <script>
-        let isSoundOn = true;
-        const gameAudio = document.getElementById('gameAudio');
-
-        // Attempt autoplay on load
-        window.addEventListener('DOMContentLoaded', () => {
-            gameAudio.play().catch(() => {
-                console.log("Autoplay blocked. Waiting for user interaction...");
-                // On first interaction, try playing if isSoundOn is still true
-                const playOnFirstInteraction = () => {
-                    if (isSoundOn) gameAudio.play();
-                    window.removeEventListener('mousedown', playOnFirstInteraction);
-                    window.removeEventListener('touchstart', playOnFirstInteraction);
-                };
-                window.addEventListener('mousedown', playOnFirstInteraction);
-                window.addEventListener('touchstart', playOnFirstInteraction);
-            });
-        });
-
-        function toggleSound() {
-            isSoundOn = !isSoundOn;
-            
-            const menuToggle = document.getElementById('menuSoundToggle');
-            const menuDot = document.getElementById('menuSoundDot');
-            
-            if (isSoundOn) {
-                gameAudio.play().catch(err => {
-                    console.log("Audio play blocked by browser. User must interact first.");
-                });
-                
-                // Sync Menu Toggle
-                if(menuToggle) menuToggle.classList.replace('bg-gray-600', 'bg-red-600');
-                if(menuDot) menuDot.classList.replace('left-0', 'left-4');
-            } else {
-                gameAudio.pause();
-                
-                // Sync Menu Toggle
-                if(menuToggle) menuToggle.classList.replace('bg-red-600', 'bg-gray-600');
-                if(menuDot) menuDot.classList.replace('left-4', 'left-0');
-            }
-        }
-
-        function switchBetTab(tab) {
-            const manual = document.getElementById('manualBettingSection');
-            const ai = document.getElementById('aiBettingSection');
-            const manualTab = document.getElementById('manualTab');
-            const aiTab = document.getElementById('aiTab');
-
-            if (tab === 'manual') {
-                manual.classList.remove('hidden');
-                ai.classList.add('hidden');
-                manualTab.classList.add('bg-red-brand');
-                manualTab.classList.remove('bg-[#1a0b16]/60', 'text-white/50');
-                aiTab.classList.add('bg-[#1a0b16]/60', 'text-white/50');
-                aiTab.classList.remove('bg-red-brand');
-            } else {
-                manual.classList.add('hidden');
-                ai.classList.remove('hidden');
-                aiTab.classList.add('bg-red-brand');
-                aiTab.classList.remove('bg-[#1a0b16]/60', 'text-white/50');
-                manualTab.classList.add('bg-[#1a0b16]/60', 'text-white/50');
-                manualTab.classList.remove('bg-red-brand');
-            }
-        }
-
-        function adjustValue(id, delta, isMultiplier = false) {
-            const input = document.getElementById(id);
-            let val = parseFloat(input.value) || 0;
-            val += delta;
-            if (val < 0) val = 0;
-            
-            if (isMultiplier) {
-                input.value = val.toFixed(1) + 'x';
-            } else {
-                input.value = (id.includes('Cashout') || id.includes('Multiplier')) ? val.toFixed(1) : Math.round(val);
-            }
-        }
-
-        function toggleAiRule(ruleId) {
-            const rule = document.getElementById(ruleId);
-            const dot = rule.querySelector('.rule-dot');
-            const isActive = rule.getAttribute('data-active') === 'true';
-            
-            if (!isActive) {
-                rule.setAttribute('data-active', 'true');
-                dot.classList.remove('bg-black');
-                dot.classList.add('bg-blue-500', 'shadow-[0_0_8px_rgba(59,130,246,0.8)]');
-            } else {
-                rule.setAttribute('data-active', 'false');
-                dot.classList.add('bg-black');
-                dot.classList.remove('bg-blue-500', 'shadow-[0_0_8px_rgba(59,130,246,0.8)]');
-            }
-        }
-
         // --- API Configuration ---
         // For mobile testing: Use your PC's local IP (e.g., http://192.168.1.5:3001)
         const API_BASE_URL = '';
@@ -1007,8 +730,8 @@
             const btnText = btn.querySelector('span');
 
             const amount = parseInt(amountStr);
-            if (!amount || amount < 100 || !phone) {
-                alert('Please enter a valid amount (Min 100) and phone number.');
+            if (!amount || amount < 200 || !phone) {
+                alert('Please enter a valid amount (Min 200) and phone number.');
                 return;
             }
 
@@ -1067,8 +790,8 @@
             const btn = document.getElementById('withdrawBtn');
             const amount = parseInt(amountStr);
 
-            if (!amount || amount < 100 || !phone) {
-                alert('Please enter a valid amount (Min 100) and phone number.');
+            if (!amount || amount < 50 || !phone) {
+                alert('Please enter a valid amount (Min 50) and phone number.');
                 return;
             }
 
@@ -1330,35 +1053,6 @@
             }
         }
 
-        function switchAuthTab(tab) {
-            const regTab = document.getElementById('tabRegister');
-            const logTab = document.getElementById('tabLogin');
-            const nameContainer = document.getElementById('authNameContainer');
-            const subtitle = document.getElementById('authSubtitle');
-            const submitBtn = document.getElementById('authSubmitBtn');
-            const nameInput = document.getElementById('authName');
-
-            if (tab === 'login') {
-                regTab.classList.remove('bg-red-brand', 'text-white');
-                regTab.classList.add('text-gray-500');
-                logTab.classList.add('bg-red-brand', 'text-white');
-                logTab.classList.remove('text-gray-500');
-                nameContainer.classList.add('hidden');
-                nameInput.required = false;
-                subtitle.innerText = 'Welcome back! Enter your phone to login.';
-                submitBtn.innerText = 'LOGIN TO GAME';
-            } else {
-                regTab.classList.add('bg-red-brand', 'text-white');
-                regTab.classList.remove('text-gray-500');
-                logTab.classList.remove('bg-red-brand', 'text-white');
-                logTab.classList.add('text-gray-500');
-                nameContainer.classList.remove('hidden');
-                nameInput.required = true;
-                subtitle.innerText = 'Start your flight to big wins!';
-                submitBtn.innerText = 'ENTER COCKPIT';
-            }
-        }
-
         function updateUIWithUser(userObj) {
             if (!userObj) return;
             const name = userObj.name;
@@ -1411,29 +1105,12 @@
         
         authForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const nameInput = document.getElementById('authName');
-            const phoneInput = document.getElementById('authPhone');
-            const phone = phoneInput.value;
-            let name = nameInput.value;
-
-            // If it's a login (name container hidden), check if we have this phone in storage
-            const isLogin = document.getElementById('tabLogin').classList.contains('bg-red-brand');
-            if (isLogin) {
-                const savedUser = localStorage.getItem('skybet_user');
-                if (savedUser) {
-                    const parsed = JSON.parse(savedUser);
-                    if (parsed.phone === phone) {
-                        name = parsed.name;
-                    }
-                }
-                if (!name) name = "Member " + phone.slice(-4);
-            }
-
-            if (phone) {
-                const userObj = { name: name || "Player", phone };
+            const name = document.getElementById('authName').value;
+            const phone = document.getElementById('authPhone').value;
+            if (name && phone) {
+                const userObj = { name, phone };
                 localStorage.setItem('skybet_user', JSON.stringify(userObj));
                 checkAuth();
-                document.getElementById('authModal').classList.add('hidden');
             }
         });
 
