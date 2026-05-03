@@ -73,28 +73,6 @@
         .animate-scale-pulse {
             animation: scalePulse 0.6s ease-in-out infinite;
         }
-    
-        .premium-btn {
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .premium-btn:hover {
-            transform: scale(1.03);
-            filter: brightness(1.1);
-        }
-        .premium-btn:active {
-            transform: scale(0.97);
-        }
-        .glow-red {
-            box-shadow: 0 0 15px rgba(211, 24, 24, 0.3);
-        }
-        .glow-green {
-            box-shadow: 0 0 15px rgba(72, 142, 26, 0.3);
-        }
-        .stake-card {
-            background: linear-gradient(145deg, #1a0b16, #2d0d16);
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
     </style>
 </head>
 
@@ -102,23 +80,23 @@
     <!-- Main Content Left -->
     <div class="flex-1 flex flex-col h-full overflow-y-auto no-scrollbar relative">
         <!-- Header -->
-        <header class="flex justify-between items-center bg-panel-dark p-3 border-b border-white/10 shrink-0">
-            <div class="flex items-center gap-2 cursor-pointer">
-                <img src="Assets/images/airplane.svg" class="h-8 w-auto object-contain filter brightness-0 invert" alt="SkyBet Logo" />
-                <span class="font-black text-xl italic tracking-tighter">SKYBET</span>
+        <header class="flex justify-between items-center bg-[#1a0b16] px-3 py-2.5 border-b border-white/5 shrink-0 sticky top-0 z-[500] backdrop-blur-md bg-opacity-95">
+            <div class="flex items-center gap-1.5 cursor-pointer">
+                <img src="Assets/images/airplane.svg" class="h-5 md:h-7 w-auto object-contain filter brightness-0 invert opacity-90" alt="SkyBet Logo" />
+                <span class="font-black text-lg md:text-xl italic tracking-tighter text-white">SKYBET</span>
             </div>
-            <div class="flex items-center gap-2">
-                <div class="flex items-center bg-panel-light rounded border border-white/20">
-                    <div id="headerBalance" class="px-3 py-1 flex items-center gap-2 text-sm font-bold text-gray-300">
-                        <i class="fa-solid fa-wallet"></i> KES 0.00
+            <div class="flex items-center gap-1.5 md:gap-3">
+                <div class="flex items-center bg-[#2d0d16] rounded-lg border border-white/10 overflow-hidden shadow-inner">
+                    <div id="headerBalance" class="pl-2.5 pr-1.5 py-1 flex items-center gap-1.5 text-[11px] md:text-sm font-black text-gray-300 whitespace-nowrap">
+                        <i class="fa-solid fa-wallet text-[10px] md:text-xs text-red-500"></i> KES 0.00
                     </div>
                     <button
-                        class="bg-red-brand text-white px-3 py-1 font-bold text-sm border-l border-white/20 hover:bg-red-700 transition-all hover:brightness-110 active:scale-95"
+                        class="bg-[#d31818] active:scale-95 transition-all text-white px-2.5 md:px-4 py-1.5 font-black text-[10px] md:text-xs border-l border-white/10 hover:bg-red-700 uppercase tracking-widest"
                         onclick="toggleModal('depositModal')">
                         DEPOSIT
                     </button>
                 </div>
-                <button class="text-white p-2 text-xl hover:text-gray-300 transition-colors" onclick="toggleHamburger()"><i
+                <button class="text-white p-1.5 md:p-2 text-lg hover:text-red-500 transition-all active:scale-90" onclick="toggleHamburger()"><i
                         class="fa-solid fa-bars"></i></button>
             </div>
         </header>
@@ -142,7 +120,7 @@
             <span class="text-green-500">5.14x</span>
             <span class="text-white">4.52x</span>
             <span class="text-green-500">84.5x</span>
-            <button
+            <button onclick="toggleModal('historyModal')"
                 class="text-gray-500 ml-auto bg-white/5 px-2 rounded hover:bg-white/10 transition-colors">•••</button>
         </div>
 
@@ -203,17 +181,18 @@
         <!-- Controls Area -->
         <div class="p-2 md:p-4 flex-1 flex flex-col gap-3">
             <!-- Tabs -->
-            <div class="flex rounded-lg overflow-hidden border border-white/10 shrink-0 shadow-lg">
-                <button
-                    class="flex-1 bg-red-brand py-2.5 text-xs font-bold text-white shadow-[inset_0_-3px_0_rgba(0,0,0,0.3)]">STAKE
+            <div class="flex rounded-lg overflow-hidden border border-white/10 shrink-0 shadow-lg mb-2">
+                <button id="manualTab" onclick="switchBetTab('manual')"
+                    class="flex-1 bg-red-brand py-2.5 text-[10px] font-black text-white shadow-[inset_0_-3px_0_rgba(0,0,0,0.3)] tracking-widest uppercase transition-all">STAKE
                     SELECTOR</button>
-                <button
-                    class="flex-1 bg-red-800 py-2.5 text-xs font-bold text-white/70 hover:bg-red-700 transition-colors">AI</button>
+                <button id="aiTab" onclick="switchBetTab('ai')"
+                    class="flex-1 bg-[#1a0b16]/60 py-2.5 text-[10px] font-black text-white/50 hover:text-white tracking-widest uppercase transition-all">AI</button>
             </div>
 
 
-            <!-- Bet Panels Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 shrink-0">
+            <!-- Betting Sections -->
+            <div id="manualBettingSection" class="block transition-all duration-300">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 shrink-0">
                 <!-- Panel 1 -->
                 <div
                     class="bg-panel-dark border border-white/10 rounded-lg p-3 flex flex-col gap-3 shadow-xl relative overflow-hidden">
@@ -223,33 +202,31 @@
                     <div class="flex gap-2">
                         <!-- Stake Controls -->
                         <div class="flex-1 flex flex-col gap-2">
-                            <div
-                                class="flex items-stretch bg-panel-light rounded border border-white/10 overflow-hidden">
-                                <button
-                                    class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-r border-white/10 transition-colors">−</button>
-                                <input type="text" id="betAmount1" value="20" class="flex-1 w-full bg-transparent text-white text-center font-bold outline-none" />
-                                <button
-                                    class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-l border-white/10 transition-colors">+</button>
+                            <div class="flex items-stretch bg-[#0a0508] rounded-xl border border-white/10 overflow-hidden h-10 shadow-inner">
+                                <button onclick="adjustValue('stake1', -10)" class="w-10 bg-white/5 hover:bg-white/10 text-gray-400 font-black active:scale-90 transition-all border-r border-white/5">
+                                    <i class="fa-solid fa-minus text-[10px]"></i>
+                                </button>
+                                <input type="number" id="stake1" value="20"
+                                    class="flex-1 w-full bg-transparent text-white text-center font-black outline-none text-sm" />
+                                <button onclick="adjustValue('stake1', 10)" class="w-10 bg-white/5 hover:bg-white/10 text-gray-400 font-black active:scale-90 transition-all border-l border-white/5">
+                                    <i class="fa-solid fa-plus text-[10px]"></i>
+                                </button>
                             </div>
-                            <div class="grid grid-cols-4 gap-1">
-                                <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(1, 50)">50</button>
-                                <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(1, 100)">100</button>
-                                <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(1, 200)">200</button>
-                                <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(1, 500)">500</button>
+                            <div class="grid grid-cols-4 gap-1.5">
+                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">50</button>
+                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">100</button>
+                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">200</button>
+                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">500</button>
                             </div>
                         </div>
                         <!-- Bet Button -->
-                        <div class="w-32 sm:w-40 flex">
-                            <button id="loginBtn1" onclick="document.getElementById('authModal').classList.remove('hidden')" class="w-full bg-blue-btn hover:bg-blue-800 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
-                                <span class="text-sm uppercase tracking-wider mb-0.5 opacity-90">LOGIN TO BET</span>
+                        <div class="w-32 sm:w-44 flex">
+                            <button id="loginBtn1" onclick="toggleModal('authModal')" class="w-full bg-[#2b59c3] active:scale-95 transition-all rounded-xl flex flex-col items-center justify-center text-white font-black shadow-xl shadow-blue-900/20 border-t border-white/10">
+                                <span class="text-xs uppercase tracking-widest opacity-90">LOGIN</span>
                             </button>
-                            <button id="betBtn1" onclick="handleBetClick()" class="hidden w-full bg-green-brand hover:bg-green-600 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
-                                <span class="text-[10px] uppercase tracking-wider mb-0.5 opacity-90">Bet [Next Game]</span>
-                                <span class="text-xl">KSH 20.00</span>
+                            <button id="betBtn1" onclick="handleBetClick()" class="hidden w-full bg-[#488e1a] active:scale-95 transition-all rounded-xl flex flex-col items-center justify-center text-white font-black shadow-xl shadow-green-900/20 border-t border-white/10">
+                                <span class="text-[9px] uppercase tracking-widest mb-0.5 opacity-80">BET</span>
+                                <span class="text-lg">KSH 20</span>
                             </button>
                         </div>
                     </div>
@@ -279,35 +256,31 @@
                     <div class="flex gap-2">
                         <!-- Stake Controls -->
                         <div class="flex-1 flex flex-col gap-2">
-                            <div
-                                class="flex items-stretch bg-panel-light rounded border border-white/10 overflow-hidden">
-                                <button
-                                    class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-r border-white/10 transition-colors">−</button>
-                                <input type="text" id="betAmount2" value="20" class="flex-1 w-full bg-transparent text-white text-center font-bold outline-none" />
-                                <button
-                                    class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold border-l border-white/10 transition-colors">+</button>
-                                <button
-                                    class="w-10 bg-black/40 hover:bg-black/60 text-gray-400 font-bold text-xs border-l border-white/10 transition-colors">*2</button>
+                            <div class="flex items-stretch bg-[#0a0508] rounded-xl border border-white/10 overflow-hidden h-10 shadow-inner">
+                                <button onclick="adjustValue('stake2', -10)" class="w-10 bg-white/5 hover:bg-white/10 text-gray-400 font-black active:scale-90 transition-all border-r border-white/5">
+                                     <i class="fa-solid fa-minus text-[10px]"></i>
+                                 </button>
+                                 <input type="number" id="stake2" value="20"
+                                     class="flex-1 w-full bg-transparent text-white text-center font-black outline-none text-sm" />
+                                 <button onclick="adjustValue('stake2', 10)" class="w-10 bg-white/5 hover:bg-white/10 text-gray-400 font-black active:scale-90 transition-all border-l border-white/5">
+                                     <i class="fa-solid fa-plus text-[10px]"></i>
+                                 </button>
                             </div>
-                            <div class="grid grid-cols-4 gap-1">
-                                <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(2, 50)">50</button>
-                                <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(2, 100)">100</button>
-                                <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(2, 200)">200</button>
-                                <button
-                                    class="bg-blue-btn py-1 rounded text-white text-[11px] font-bold border border-blue-400/30 hover:bg-blue-800 transition-colors shadow-inner" type="button" onclick="setBetAmount(2, 500)">500</button>
+                            <div class="grid grid-cols-4 gap-1.5">
+                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">50</button>
+                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">100</button>
+                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">200</button>
+                                <button class="bg-[#2b59c3] py-2 rounded-lg text-white text-[10px] font-black border-b-2 border-black/30 active:scale-90 transition-all shadow-lg shadow-blue-900/20">500</button>
                             </div>
                         </div>
                         <!-- Bet Button -->
-                        <div class="w-32 sm:w-40 flex">
-                            <button id="regBtn2" onclick="document.getElementById('authModal').classList.remove('hidden')" class="w-full bg-red-brand hover:bg-red-800 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
-                                <span class="text-sm uppercase tracking-wider mb-0.5 opacity-90">REGISTER</span>
+                        <div class="w-32 sm:w-44 flex">
+                            <button id="regBtn2" onclick="toggleModal('authModal')" class="w-full bg-[#df3131] active:scale-95 transition-all rounded-xl flex flex-col items-center justify-center text-white font-black shadow-xl shadow-red-900/20 border-t border-white/10">
+                                <span class="text-xs uppercase tracking-widest opacity-90">REGISTER</span>
                             </button>
-                            <button id="betBtn2" onclick="handleBetClick()" class="hidden w-full bg-green-brand hover:bg-green-600 rounded flex flex-col items-center justify-center text-white font-bold shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-transform active:translate-y-1">
-                                <span class="text-[10px] uppercase tracking-wider mb-0.5 opacity-90">Bet [Next Game]</span>
-                                <span class="text-xl">KSH 20.00</span>
+                            <button id="betBtn2" onclick="handleBetClick()" class="hidden w-full bg-[#488e1a] active:scale-95 transition-all rounded-xl flex flex-col items-center justify-center text-white font-black shadow-xl shadow-green-900/20 border-t border-white/10">
+                                <span class="text-[9px] uppercase tracking-widest mb-0.5 opacity-80">BET</span>
+                                <span class="text-lg">KSH 20</span>
                             </button>
                         </div>
                     </div>
@@ -327,6 +300,88 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- AI Section -->
+        <div id="aiBettingSection" class="hidden transition-all duration-300">
+            <div class="bg-[#14183d] border border-white/10 rounded-2xl p-4 flex flex-col gap-4 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-transparent opacity-30"></div>
+                
+                <!-- Top Controls -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[9px] font-black text-gray-500 tracking-widest uppercase ml-1">Base Bet</label>
+                        <div class="flex items-stretch bg-black rounded-xl border border-white/5 overflow-hidden h-11 shadow-inner">
+                            <button onclick="adjustValue('aiBaseBet', -10)" class="w-10 bg-white/5 hover:bg-white/10 text-white font-black active:scale-90 transition-all border-r border-white/5"><i class="fa-solid fa-minus text-[10px]"></i></button>
+                            <input type="number" id="aiBaseBet" value="100" class="flex-1 w-full bg-transparent text-white text-center font-black outline-none text-sm" />
+                            <button onclick="adjustValue('aiBaseBet', 10)" class="w-10 bg-white/5 hover:bg-white/10 text-white font-black active:scale-90 transition-all border-l border-white/5"><i class="fa-solid fa-plus text-[10px]"></i></button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[9px] font-black text-gray-500 tracking-widest uppercase ml-1">Auto Cashout</label>
+                        <div class="flex items-stretch bg-black rounded-xl border border-white/5 overflow-hidden h-11 shadow-inner">
+                            <button onclick="adjustValue('aiAutoCashout', -0.1)" class="w-10 bg-white/5 hover:bg-white/10 text-white font-black active:scale-90 transition-all border-r border-white/5"><i class="fa-solid fa-minus text-[10px]"></i></button>
+                            <input type="number" id="aiAutoCashout" value="2.1" step="0.1" class="flex-1 w-full bg-transparent text-white text-center font-black outline-none text-sm" />
+                            <button onclick="adjustValue('aiAutoCashout', 0.1)" class="w-10 bg-white/5 hover:bg-white/10 text-white font-black active:scale-90 transition-all border-l border-white/5"><i class="fa-solid fa-plus text-[10px]"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Rules -->
+                <div class="flex flex-col gap-4">
+                    <!-- If Win -->
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-5 h-5 rounded-full border-2 border-green-500/30 flex items-center justify-center bg-green-500/10">
+                                <i class="fa-solid fa-check text-[9px] text-green-500"></i>
+                            </div>
+                            <span class="text-[10px] font-black text-white/80 tracking-wide uppercase">If You Win:</span>
+                        </div>
+                        <div class="flex items-center gap-3 pl-7">
+                            <button onclick="toggleAiRule('ruleWin')" id="ruleWin" data-active="true" class="w-5 h-5 rounded-full border border-white/10 bg-black/40 flex items-center justify-center active:scale-90 transition-all">
+                                <div class="rule-dot w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)] transition-all"></div>
+                            </button>
+                            <span class="text-[10px] font-bold text-gray-500 uppercase">Increase bet by:</span>
+                            <div class="flex items-stretch bg-black border border-white/5 rounded-lg overflow-hidden ml-auto h-9 w-24 shadow-inner">
+                                <input type="text" id="aiWinMultiplier" value="2.0x" class="flex-1 bg-transparent text-center text-white text-[10px] font-black outline-none" readonly />
+                                <div class="flex flex-col border-l border-white/5">
+                                    <button onclick="adjustValue('aiWinMultiplier', 0.1, true)" class="flex-1 px-2.5 hover:bg-white/5 text-gray-500 hover:text-white transition-colors border-b border-white/5"><i class="fa-solid fa-chevron-up text-[8px]"></i></button>
+                                    <button onclick="adjustValue('aiWinMultiplier', -0.1, true)" class="flex-1 px-2.5 hover:bg-white/5 text-gray-500 hover:text-white transition-colors"><i class="fa-solid fa-chevron-down text-[8px]"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- If Lose -->
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-5 h-5 rounded-full border-2 border-red-500/30 flex items-center justify-center bg-red-500/10">
+                                <i class="fa-solid fa-xmark text-[9px] text-red-500"></i>
+                            </div>
+                            <span class="text-[10px] font-black text-white/80 tracking-wide uppercase">If You Lose:</span>
+                        </div>
+                        <div class="flex items-center gap-3 pl-7">
+                            <button onclick="toggleAiRule('ruleLose')" id="ruleLose" data-active="false" class="w-5 h-5 rounded-full border border-white/10 bg-black/40 flex items-center justify-center active:scale-90 transition-all">
+                                <div class="rule-dot w-2 h-2 rounded-full bg-black transition-all"></div>
+                            </button>
+                            <span class="text-[10px] font-bold text-gray-500 uppercase">Increase bet by:</span>
+                            <div class="flex items-stretch bg-black border border-white/5 rounded-lg overflow-hidden ml-auto h-9 w-24 shadow-inner">
+                                <input type="text" id="aiLoseMultiplier" value="2.0x" class="flex-1 bg-transparent text-center text-white text-[10px] font-black outline-none" readonly />
+                                <div class="flex flex-col border-l border-white/5">
+                                    <button onclick="adjustValue('aiLoseMultiplier', 0.1, true)" class="flex-1 px-2.5 hover:bg-white/5 text-gray-500 hover:text-white transition-colors border-b border-white/5"><i class="fa-solid fa-chevron-up text-[8px]"></i></button>
+                                    <button onclick="adjustValue('aiLoseMultiplier', -0.1, true)" class="flex-1 px-2.5 hover:bg-white/5 text-gray-500 hover:text-white transition-colors"><i class="fa-solid fa-chevron-down text-[8px]"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Start Button -->
+                <button class="w-full bg-[#df3131] hover:bg-[#b52626] active:scale-95 transition-all py-4 rounded-xl text-white font-black text-sm tracking-[0.1em] uppercase shadow-[0_5px_15px_rgba(223,49,49,0.2)] border-t border-white/10 mt-1">
+                    START AUTOPLAY
+                </button>
+            </div>
+        </div>
 
 
             <!-- Live Data Section -->
@@ -408,7 +463,7 @@
                 </div>
                 <div>
                     <div id="sidebarName" class="text-sm font-bold uppercase tracking-wide text-white">Guest</div>
-                    <div id="sidebarPhone" class="text-[10px] text-gray-400">+254 ••• ••• •••</div>
+                    <div id="sidebarPhone" class="text-[10px] text-gray-400">+254 ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó</div>
                 </div>
             </div>
             <div class="flex items-center gap-1.5 text-xs text-green-500 font-semibold">
@@ -452,7 +507,7 @@
                 </div>
                 <div class="overflow-hidden">
                     <div id="menuName" class="text-sm font-bold uppercase tracking-wide text-white truncate">Guest</div>
-                    <div id="menuPhone" class="text-[10px] text-gray-400 truncate">+254 ••• ••• •••</div>
+                    <div id="menuPhone" class="text-[10px] text-gray-400 truncate">+254 ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó</div>
                 </div>
             </div>
 
@@ -514,7 +569,7 @@
                         <div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-[#1d0e19]"></div>
                     </div>
                     <div id="walletName" class="text-white font-bold text-lg">Guest</div>
-                    <div id="walletPhone" class="text-gray-400 text-xs">+254 ••• ••• •••</div>
+                    <div id="walletPhone" class="text-gray-400 text-xs">+254 ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó</div>
                 </div>
 
                 <!-- Balance Card -->
@@ -538,15 +593,15 @@
                     </div>
                     <div class="bg-[#381123] rounded-b-xl border border-white/10 p-4 shadow-inner">
                         <div class="text-gray-300 text-xs mb-1.5">Amount to Withdraw</div>
-                        <input type="number" id="withdrawAmount" value="100" class="w-full bg-[#0b1021] border border-white/10 rounded-lg px-3 py-2.5 text-white outline-none focus:border-red-brand transition-colors mb-3" />
+                        <input type="number" id="withdrawAmount" value="50" class="w-full bg-[#0b1021] border border-white/10 rounded-lg px-3 py-2.5 text-white outline-none focus:border-red-brand transition-colors mb-3" />
                         
                         <div class="grid grid-cols-4 gap-2 mb-2">
-                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors" type="button" onclick="setWithdrawAmount(100)">100</button>
-                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors" type="button" onclick="setWithdrawAmount(500)">500</button>
-                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors" type="button" onclick="setWithdrawAmount(1000)">1,000</button>
-                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors" type="button" onclick="setWithdrawAmount(5000)">5,000</button>
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">100</button>
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">500</button>
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">1,000</button>
+                            <button class="bg-transparent border border-green-700/50 hover:bg-green-700/20 rounded py-1.5 text-green-500 text-xs font-bold transition-colors">5,000</button>
                         </div>
-                        <div class="text-gray-500 text-[10px] mb-4">Minimum withdrawal: 100 • Maximum: 300000</div>
+                        <div class="text-gray-500 text-[10px] mb-4">Minimum withdrawal: ΓÇó Maximum: 300000</div>
 
                         <div class="text-gray-300 text-xs mb-1.5">M-Pesa Phone Number</div>
                         <div class="flex items-center bg-[#4d1f2e] border border-white/10 rounded-lg overflow-hidden mb-4">
@@ -628,208 +683,227 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
-    
     <!-- Auth Modal -->
-    <div id="authModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[600] flex items-center justify-center p-4">
+    <div id="authModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[600] flex items-center justify-center p-4 hidden">
         <div class="bg-[#1a0b16] border border-white/10 w-full max-w-md rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
-            <!-- Decorative Background Elements -->
-            <div class="absolute -top-24 -left-24 w-48 h-48 bg-red-600/10 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-blue-600/10 rounded-full blur-3xl"></div>
-            
             <button class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 transition-colors z-20" onclick="document.getElementById('authModal').classList.add('hidden')"><i class="fa-solid fa-xmark"></i></button>
             <div class="relative z-10 flex flex-col items-center">
                 <div class="w-20 h-20 bg-red-brand rounded-2xl flex items-center justify-center shadow-lg mb-6 rotate-3">
                     <img src="Assets/images/airplane.svg" class="w-12 h-12 filter brightness-0 invert" alt="Logo" />
                 </div>
-                
                 <h2 class="text-3xl font-black italic text-white mb-2 tracking-tighter uppercase">SKYBET</h2>
-                
-                <!-- Tab Switcher -->
                 <div class="flex w-full bg-black/40 p-1 rounded-xl border border-white/5 mb-8">
                     <button id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-2 text-xs font-bold rounded-lg bg-red-brand text-white transition-all">REGISTER</button>
                     <button id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-2 text-xs font-bold rounded-lg text-gray-500 hover:text-white transition-all">LOGIN</button>
                 </div>
-
                 <p id="authSubtitle" class="text-gray-400 text-sm mb-6 text-center font-medium">Start your flight to big wins!</p>
-                
                 <form id="authForm" class="w-full flex flex-col gap-5">
                     <div id="authNameContainer" class="flex flex-col gap-2 transition-all duration-300 opacity-100">
                         <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase ml-1">Account Holder</label>
                         <div class="relative">
                             <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
-                            <input type="text" id="authName" placeholder="Enter Full Name" required 
-                                class="w-full bg-black/40 border border-white/10 rounded-xl px-11 py-4 text-white outline-none focus:border-red-brand focus:ring-1 focus:ring-red-brand/30 transition-all placeholder:text-gray-600 font-medium" />
+                            <input type="text" id="authName" placeholder="Enter Full Name" required class="w-full bg-black/40 border border-white/10 rounded-xl px-11 py-4 text-white outline-none focus:border-red-brand transition-all font-medium" />
                         </div>
                     </div>
-
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase ml-1">M-Pesa Number</label>
                         <div class="relative">
                             <i class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
-                            <input type="tel" id="authPhone" placeholder="07xxxxxxxx" required 
-                                class="w-full bg-black/40 border border-white/10 rounded-xl px-11 py-4 text-white outline-none focus:border-red-brand focus:ring-1 focus:ring-red-brand/30 transition-all placeholder:text-gray-600 font-medium" />
+                            <input type="tel" id="authPhone" placeholder="07xxxxxxxx" required class="w-full bg-black/40 border border-white/10 rounded-xl px-11 py-4 text-white outline-none focus:border-red-brand transition-all font-medium" />
                         </div>
                     </div>
-
-                    <button type="submit" id="authSubmitBtn" class="w-full bg-red-brand hover:bg-red-700 text-white font-bold py-4 rounded-xl mt-4 transition-all shadow-[0_10px_20px_rgba(211,24,24,0.3)] hover:translate-y-[-2px] active:translate-y-0 text-lg tracking-wide uppercase">
-                        ENTER COCKPIT
-                    </button>
-                    
-                    <p class="text-[10px] text-gray-500 text-center mt-2 leading-relaxed">
-                        By entering, you confirm you are 18+ and agree to our <br/> 
-                        <span class="text-gray-400 underline cursor-pointer">Terms & Conditions</span>
-                    </p>
+                    <button type="submit" id="authSubmitBtn" class="w-full bg-red-brand active:scale-95 transition-all text-white font-bold py-4 rounded-xl mt-4 shadow-lg text-lg tracking-wide uppercase">ENTER COCKPIT</button>
                 </form>
             </div>
         </div>
     </div>
 
-
-    
     <!-- Deposit Modal -->
-    <div id="depositModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[500] flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
-        <div class="bg-[#1a0b16] border border-white/10 w-full max-w-md rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden transform scale-95 transition-transform duration-200" id="depositModalContent">
-            <!-- Decorative Background Elements -->
-            <div class="absolute -top-24 -left-24 w-48 h-48 bg-red-600/10 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-green-600/10 rounded-full blur-3xl"></div>
+    <div id="depositModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[500] flex items-center justify-center p-4 hidden opacity-0 transition-all duration-300">
+        <div class="bg-[#1a0b16] border border-white/10 w-full max-w-md rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative overflow-hidden transform scale-95 transition-all duration-300" id="depositModalContent">
+            <!-- Decorative Glows -->
+            <div class="absolute -top-24 -left-24 w-48 h-48 bg-red-600/20 rounded-full blur-[80px] pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-green-600/20 rounded-full blur-[80px] pointer-events-none"></div>
             
-            <button class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 transition-colors z-20" onclick="toggleModal('depositModal')">
-                <i class="fa-solid fa-xmark"></i>
+            <!-- Close Button -->
+            <button class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 hover:rotate-90 transition-all z-20" onclick="toggleModal('depositModal')">
+                <i class="fa-solid fa-xmark text-lg"></i>
             </button>
 
             <div class="relative z-10">
-                <h2 class="text-2xl font-black italic text-white mb-1 tracking-tighter uppercase">DEPOSIT FUNDS</h2>
-                <p class="text-gray-400 text-sm mb-6 font-medium">Send money to your betting account via M-Pesa</p>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 bg-[#488e1a] rounded-2xl flex items-center justify-center shadow-lg shadow-green-900/20">
+                        <i class="fa-solid fa-money-bill-transfer text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-black italic text-white tracking-tighter uppercase leading-none">DEPOSIT FUNDS</h2>
+                        <p class="text-gray-500 text-[10px] font-bold tracking-widest uppercase mt-1">Instant M-Pesa Transfer</p>
+                    </div>
+                </div>
                 
-                <!-- Presets -->
-                <div class="grid grid-cols-3 gap-3 mb-6">
-                    <button class="bg-black/40 hover:bg-red-brand/20 border border-white/10 rounded-xl py-3 text-white font-bold text-sm transition-all" type="button" onclick="setDepositAmount(100)">+100</button>
-                    <button class="bg-black/40 hover:bg-red-brand/20 border border-white/10 rounded-xl py-3 text-white font-bold text-sm transition-all" type="button" onclick="setDepositAmount(500)">+500</button>
-                    <button class="bg-black/40 hover:bg-red-brand/20 border border-white/10 rounded-xl py-3 text-white font-bold text-sm transition-all" type="button" onclick="setDepositAmount(1000)">+1000</button>
+                <!-- Amount Presets -->
+                <div class="grid grid-cols-4 gap-2 mb-8">
+                    <button type="button" class="bg-black/40 hover:bg-red-brand/20 border border-white/5 rounded-xl py-3 text-white font-bold text-xs transition-all active:scale-90" onclick="setDepositAmount(100)">100</button>
+                    <button type="button" class="bg-black/40 hover:bg-red-brand/20 border border-white/5 rounded-xl py-3 text-white font-bold text-xs transition-all active:scale-90" onclick="setDepositAmount(250)">250</button>
+                    <button type="button" class="bg-black/40 hover:bg-red-brand/20 border border-white/5 rounded-xl py-3 text-white font-bold text-xs transition-all active:scale-90" onclick="setDepositAmount(500)">500</button>
+                    <button type="button" class="bg-black/40 hover:bg-red-brand/20 border border-white/5 rounded-xl py-3 text-white font-bold text-xs transition-all active:scale-90" onclick="setDepositAmount(1000)">1000</button>
                 </div>
 
-                <div class="flex flex-col gap-5">
+                <div class="flex flex-col gap-6">
+                    <!-- Amount Input -->
                     <div class="flex flex-col gap-2">
-                        <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase ml-1">Amount (KES)</label>
-                        <div class="relative">
-                            <i class="fa-solid fa-money-bill-1 absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
-                            <input type="number" id="depositAmount" placeholder="Min 100" 
-                                class="w-full bg-black/40 border border-white/10 rounded-xl px-11 py-4 text-white outline-none focus:border-red-brand focus:ring-1 focus:ring-red-brand/30 transition-all font-bold text-lg" />
+                        <div class="flex justify-between items-center px-1">
+                            <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase">Amount to Deposit</label>
+                            <span class="text-[9px] font-bold text-red-brand/80">MIN KES 100</span>
                         </div>
-                        <p class="text-[10px] text-gray-500 ml-1">Min: 100 | Max: 150,000</p>
+                        <div class="relative group">
+                            <div class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-brand transition-colors">KES</div>
+                            <input type="number" id="depositAmount" placeholder="100.00" 
+                                class="w-full bg-black/60 border border-white/10 rounded-2xl px-14 py-5 text-white outline-none focus:border-red-brand focus:ring-4 focus:ring-red-brand/10 transition-all font-black text-2xl shadow-inner" />
+                        </div>
                     </div>
 
+                    <!-- Phone Input -->
                     <div class="flex flex-col gap-2">
                         <label class="text-[10px] font-bold text-gray-500 tracking-widest uppercase ml-1">M-Pesa Number</label>
-                        <div class="relative">
-                            <i class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
+                        <div class="relative group">
+                            <i class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-red-brand transition-colors"></i>
                             <input type="tel" id="depositPhone" placeholder="07xxxxxxxx" 
-                                class="w-full bg-black/40 border border-white/10 rounded-xl px-11 py-4 text-white outline-none focus:border-red-brand focus:ring-1 focus:ring-red-brand/30 transition-all font-medium" />
+                                class="w-full bg-black/60 border border-white/10 rounded-2xl px-12 py-4 text-white outline-none focus:border-red-brand focus:ring-4 focus:ring-red-brand/10 transition-all font-bold shadow-inner" />
                         </div>
                     </div>
 
-                    <button id="depositBtn" onclick="processDeposit()" class="w-full bg-red-brand hover:bg-red-700 text-white font-bold py-4 rounded-xl mt-2 transition-all shadow-[0_10px_20px_rgba(211,24,24,0.3)] hover:translate-y-[-2px] active:translate-y-0 text-lg tracking-wide uppercase">
+                    <!-- Submit Button -->
+                    <button id="depositBtn" onclick="processDeposit()" class="w-full bg-red-brand active:scale-95 transition-all text-white font-black py-5 rounded-2xl shadow-xl shadow-red-900/40 text-lg tracking-widest uppercase mt-2 border-t border-white/20">
                         <span>DEPOSIT FUNDS</span>
                     </button>
+                    
+                    <p class="text-center text-gray-600 text-[10px] font-medium px-4">
+                        An STK Push will be sent to your phone. Enter your PIN to complete.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
 
-                <!-- Phone Input -->
-                <div class="flex flex-col gap-2">
-                    <label class="text-[15px] text-white/90 font-semibold">M-Pesa phone number</label>
-                    <input type="text" id="depositPhone" placeholder="format. 07xxxxxxxx or 01xxxxxxxx"
-                        class="w-full bg-[#3a3a3a] border-0 rounded-lg p-4 text-white font-medium outline-none focus:ring-2 focus:ring-red-700 placeholder-gray-400 shadow-inner" />
-                </div>
-
-                <!-- Submit -->
-                <button id="depositBtn"
-                    class="relative flex justify-center items-center w-full bg-[#8b7d2a] hover:bg-[#a69432] active:scale-95 text-white font-bold py-4 rounded-lg uppercase tracking-widest shadow-[0_6px_20px_rgba(139,125,42,0.5)] transition-all hover:scale-[1.01] hover:brightness-110"
-                    onclick="processDeposit()">
-                    <span><span class="relative z-10">DEPOSIT FUNDS</span></span>
+    <!-- History Modal -->
+    <div id="historyModal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[700] flex items-center justify-center p-4 hidden opacity-0 transition-all duration-300">
+        <div class="bg-gradient-to-b from-[#5c0d1a] to-[#1a0b16] border border-white/20 w-full max-w-3xl rounded-2xl p-6 shadow-[0_20px_60px_rgba(0,0,0,0.8)] relative overflow-hidden transform scale-95 transition-all duration-300" id="historyModalContent">
+            <div class="flex justify-between items-center mb-6 px-2">
+                <h2 class="text-white font-black italic tracking-tighter text-lg uppercase">ROUND HISTORY</h2>
+                <button class="w-10 h-10 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-white/10 transition-all" onclick="toggleModal('historyModal')">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
+            <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 max-h-[60vh] overflow-y-auto no-scrollbar p-2">
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.26x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.78x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.07x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.69x</div>
+                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">21.54x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.69x</div>
+                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-600 font-bold text-sm bg-black/40">100x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.23x</div>
+                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">13.16x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.9x</div>
+                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">9.76x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.89x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.72x</div>
+                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">16.06x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.7x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.72x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.88x</div>
+                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">30.76x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.96x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.97x</div>
+                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">29.51x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.73x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.79x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">4.08x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.69x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.81x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.77x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.88x</div>
+                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">24.01x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.77x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">4.31x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.73x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.18x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">4.72x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.1x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.47x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.83x</div>
+                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">7.24x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">4.63x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.18x</div>
+                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">14.4x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.27x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">3.9x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.77x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.78x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.87x</div>
+                <div class="border-2 border-white/80 rounded-lg py-1.5 text-center text-white font-bold text-sm bg-black/40">2.11x</div>
+                <div class="border-2 border-green-600 rounded-lg py-1.5 text-center text-green-500 font-bold text-sm bg-black/40">95.39x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.83x</div>
+                <div class="border-2 border-blue-600 rounded-lg py-1.5 text-center text-blue-500 font-bold text-sm bg-black/40">1.85x</div>
+            </div>
         </div>
     </div>
 
-
     <script>
+        function switchBetTab(tab) {
+            const manual = document.getElementById('manualBettingSection');
+            const ai = document.getElementById('aiBettingSection');
+            const manualTab = document.getElementById('manualTab');
+            const aiTab = document.getElementById('aiTab');
 
-        function setDepositAmount(val) {
-            const el = document.getElementById('depositAmount');
-            if (el) el.value = val;
-        }
-        function setWithdrawAmount(val) {
-            const el = document.getElementById('withdrawAmount');
-            if (el) el.value = val;
-        }
-
-
-        function setBetAmount(panel, val) {
-            const el = document.getElementById('betAmount' + panel);
-            if (el) el.value = val;
-            updateBetDisplay(panel);
-        }
-        function changeBetAmount(panel, val) {
-            const el = document.getElementById('betAmount' + panel);
-            if (el) {
-                let curr = parseInt(el.value) || 0;
-                el.value = Math.max(1, curr + val);
-                updateBetDisplay(panel);
-            }
-        }
-        function doubleBetAmount(panel) {
-            const el = document.getElementById('betAmount' + panel);
-            if (el) {
-                let curr = parseInt(el.value) || 0;
-                el.value = curr * 2;
-                updateBetDisplay(panel);
-            }
-        }
-        function updateBetDisplay(panel) {
-            const el = document.getElementById('betAmount' + panel);
-            const btn = document.getElementById('betBtn' + panel);
-            if (el && btn) {
-                const val = parseFloat(el.value) || 0;
-                const span = btn.querySelector('.text-xl');
-                if (span) span.innerText = 'KSH ' + val.toFixed(2);
-            }
-        }
-
-
-        function switchAuthTab(tab) {
-            const tabReg = document.getElementById('tabRegister');
-            const tabLogin = document.getElementById('tabLogin');
-            const nameContainer = document.getElementById('authNameContainer');
-            const subtitle = document.getElementById('authSubtitle');
-            const submitBtn = document.getElementById('authSubmitBtn');
-            const nameInput = document.getElementById('authName');
-
-            if (tab === 'login') {
-                tabReg.classList.remove('bg-red-brand', 'text-white');
-                tabReg.classList.add('text-gray-500');
-                tabLogin.classList.add('bg-red-brand', 'text-white');
-                tabLogin.classList.remove('text-gray-500');
-                nameContainer.classList.add('hidden'); nameContainer.classList.add('opacity-0');
-                nameInput.required = false;
-                subtitle.innerText = 'Welcome back! Enter your phone to login.';
-                submitBtn.innerText = 'LOGIN TO GAME';
+            if (tab === 'manual') {
+                manual.classList.remove('hidden');
+                ai.classList.add('hidden');
+                manualTab.classList.add('bg-red-brand');
+                manualTab.classList.remove('bg-[#1a0b16]/60', 'text-white/50');
+                aiTab.classList.add('bg-[#1a0b16]/60', 'text-white/50');
+                aiTab.classList.remove('bg-red-brand');
             } else {
-                tabReg.classList.add('bg-red-brand', 'text-white');
-                tabReg.classList.remove('text-gray-500');
-                tabLogin.classList.remove('bg-red-brand', 'text-white');
-                tabLogin.classList.add('text-gray-500');
-                nameContainer.classList.remove('hidden'); nameContainer.classList.remove('opacity-0');
-                nameInput.required = true;
-                subtitle.innerText = 'Start your flight to big wins!';
-                submitBtn.innerText = 'ENTER COCKPIT';
+                manual.classList.add('hidden');
+                ai.classList.remove('hidden');
+                aiTab.classList.add('bg-red-brand');
+                aiTab.classList.remove('bg-[#1a0b16]/60', 'text-white/50');
+                manualTab.classList.add('bg-[#1a0b16]/60', 'text-white/50');
+                manualTab.classList.remove('bg-red-brand');
+            }
+        }
+
+        function adjustValue(id, delta, isMultiplier = false) {
+            const input = document.getElementById(id);
+            let val = parseFloat(input.value) || 0;
+            val += delta;
+            if (val < 0) val = 0;
+            
+            if (isMultiplier) {
+                input.value = val.toFixed(1) + 'x';
+            } else {
+                input.value = (id.includes('Cashout') || id.includes('Multiplier')) ? val.toFixed(1) : Math.round(val);
+            }
+        }
+
+        function toggleAiRule(ruleId) {
+            const rule = document.getElementById(ruleId);
+            const dot = rule.querySelector('.rule-dot');
+            const isActive = rule.getAttribute('data-active') === 'true';
+            
+            if (!isActive) {
+                rule.setAttribute('data-active', 'true');
+                dot.classList.remove('bg-black');
+                dot.classList.add('bg-blue-500', 'shadow-[0_0_8px_rgba(59,130,246,0.8)]');
+            } else {
+                rule.setAttribute('data-active', 'false');
+                dot.classList.add('bg-black');
+                dot.classList.remove('bg-blue-500', 'shadow-[0_0_8px_rgba(59,130,246,0.8)]');
             }
         }
 
@@ -926,7 +1000,7 @@
 
             } catch (err) {
                 console.error(err);
-                alert('M-Pesa Service Error. Please try again later.');
+                alert('Server error! Make sure the Node.js backend is running on port 3001.');
                 btn.disabled = false;
                 btnText.innerText = 'DEPOSIT FUNDS';
                 btn.classList.remove('opacity-70');
@@ -1127,7 +1201,7 @@
             const cpX = startX + (currentX - startX) * 0.60;
             const cpY = startY;
 
-            // ── Filled red wedge ─────────────────────────────────────────────────────
+            // ΓöÇΓöÇ Filled red wedge ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
             ctx.beginPath();
             ctx.moveTo(startX, startY);
             ctx.quadraticCurveTo(cpX, cpY, currentX, currentY);
@@ -1140,7 +1214,7 @@
             ctx.fillStyle = fillGrad;
             ctx.fill();
 
-            // ── Edge line ────────────────────────────────────────────────────────
+            // ΓöÇΓöÇ Edge line ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
             ctx.beginPath();
             ctx.moveTo(startX, startY);
             ctx.quadraticCurveTo(cpX, cpY, currentX, currentY);
@@ -1149,7 +1223,7 @@
             ctx.lineCap = 'round';
             ctx.stroke();
 
-            // ── Plane positioning ──────────────────────────────────────────────────────
+            // ΓöÇΓöÇ Plane positioning ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
             const angle = 0;
             const planeW = 200;
             const usedH = planeH > 0 ? planeH : 95;
@@ -1203,6 +1277,35 @@
             }
         }
 
+        function switchAuthTab(tab) {
+            const regTab = document.getElementById('tabRegister');
+            const logTab = document.getElementById('tabLogin');
+            const nameContainer = document.getElementById('authNameContainer');
+            const subtitle = document.getElementById('authSubtitle');
+            const submitBtn = document.getElementById('authSubmitBtn');
+            const nameInput = document.getElementById('authName');
+
+            if (tab === 'login') {
+                regTab.classList.remove('bg-red-brand', 'text-white');
+                regTab.classList.add('text-gray-500');
+                logTab.classList.add('bg-red-brand', 'text-white');
+                logTab.classList.remove('text-gray-500');
+                nameContainer.classList.add('hidden');
+                nameInput.required = false;
+                subtitle.innerText = 'Welcome back! Enter your phone to login.';
+                submitBtn.innerText = 'LOGIN TO GAME';
+            } else {
+                regTab.classList.add('bg-red-brand', 'text-white');
+                regTab.classList.remove('text-gray-500');
+                logTab.classList.remove('bg-red-brand', 'text-white');
+                logTab.classList.add('text-gray-500');
+                nameContainer.classList.remove('hidden');
+                nameInput.required = true;
+                subtitle.innerText = 'Start your flight to big wins!';
+                submitBtn.innerText = 'ENTER COCKPIT';
+            }
+        }
+
         function updateUIWithUser(userObj) {
             if (!userObj) return;
             const name = userObj.name;
@@ -1253,33 +1356,31 @@
             }
         }
         
-                authForm.addEventListener('submit', (e) => {
+        authForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const nameInput = document.getElementById('authName');
             const phoneInput = document.getElementById('authPhone');
-            const phone = phoneInput ? phoneInput.value : '';
-            let name = nameInput ? nameInput.value : '';
-            
-            const isLogin = document.getElementById('tabLogin') && document.getElementById('tabLogin').classList.contains('bg-red-brand');
+            const phone = phoneInput.value;
+            let name = nameInput.value;
 
+            // If it's a login (name container hidden), check if we have this phone in storage
+            const isLogin = document.getElementById('tabLogin').classList.contains('bg-red-brand');
             if (isLogin) {
                 const savedUser = localStorage.getItem('skybet_user');
                 if (savedUser) {
                     const parsed = JSON.parse(savedUser);
-                    if (parsed.phone === phone) name = parsed.name;
+                    if (parsed.phone === phone) {
+                        name = parsed.name;
+                    }
                 }
-                if (!name) name = "Member " + (phone ? phone.slice(-4) : "User");
+                if (!name) name = "Member " + phone.slice(-4);
             }
 
             if (phone) {
                 const userObj = { name: name || "Player", phone };
                 localStorage.setItem('skybet_user', JSON.stringify(userObj));
                 checkAuth();
-                const modal = document.getElementById('authModal');
-                if (modal) modal.classList.add('hidden');
-                console.log('Auth success:', userObj);
-            } else {
-                alert('Please enter your phone number');
+                document.getElementById('authModal').classList.add('hidden');
             }
         });
 
@@ -1290,13 +1391,13 @@
             
             // Reset UI
             document.getElementById('sidebarName').innerText = 'Guest';
-            document.getElementById('sidebarPhone').innerText = '+254 ••• ••• •••';
+            document.getElementById('sidebarPhone').innerText = '+254 ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó';
             document.getElementById('sidebarInitial').innerHTML = '<i class="fa-solid fa-user"></i>';
             document.getElementById('menuName').innerText = 'Guest';
-            document.getElementById('menuPhone').innerText = '+254 ••• ••• •••';
+            document.getElementById('menuPhone').innerText = '+254 ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó';
             document.getElementById('menuInitial').innerHTML = '<i class="fa-solid fa-user"></i>';
             document.getElementById('walletName').innerText = 'Guest';
-            document.getElementById('walletPhone').innerText = '+254 ••• ••• •••';
+            document.getElementById('walletPhone').innerText = '+254 ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇó';
             document.getElementById('walletInitial').innerHTML = 'G';
             document.getElementById('walletMpesaPhone').value = '';
             
